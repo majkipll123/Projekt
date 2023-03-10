@@ -13,8 +13,14 @@ class MainApp(App):
         main_layout = BoxLayout(orientation = "vertical")
         #add another layout to the main layout
         #layout bedzie wysuwał sie z boku onka po kliknięciu na przycisk
-        self.solution = TextInput(multiline = False, readonly = True, halign = "right", font_size = 55)    
-
+        self.waluta = [[TextInput(multiline = False, readonly = False, halign = "right", font_size = 55, pos_hint = {"center_x":0.5, "center_y":0.5})]
+                       [TextInput(multiline = False, readonly = False, halign = "right", font_size = 55, pos_hint = {"center_x":0.5, "center_y":0.5})]
+                       [TextInput(multiline = False, readonly = False, halign = "right", font_size = 55, pos_hint = {"center_x":0.5, "center_y":0.5})]
+                       [TextInput(multiline = False, readonly = False, halign = "right", font_size = 55, pos_hint = {"center_x":0.5, "center_y":0.5})] 
+                       ]
+        main_layout.add_widget(self.waluta)
+        main_layout.add_widget(self.wartosc)
+        main_layout.add_widget(self.waluta2)
         main_layout.add_widget(self.solution)
         buttons = [
             ["7","8","9","/"],
@@ -60,7 +66,7 @@ class MainApp(App):
         if text:
             solution = str(eval(self.solution.text))
             self.solution.text = solution
-    def build(self):
+"""  def build(self):
 
         btn = Button(text = "$$$",
                      size_hint = (0.5, 0.5),
@@ -69,7 +75,7 @@ class MainApp(App):
                      background_normal = "")
         return btn    
     root = Button()
-
+"""
 if __name__ == "__main__":
     
     app = MainApp()
