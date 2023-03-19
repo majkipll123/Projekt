@@ -63,7 +63,7 @@ class MainApp(App):
     def build(self):
 
         btn = Button(text = "$$$",
-                     size_hint = (0.5, 0.5),
+                     size_hint = (0.1, 0.1),
                      pos_hint = {"center_x":0.5, "center_y":0.5},
                      background_color = (0,0,0,0),
                      background_normal = "")
