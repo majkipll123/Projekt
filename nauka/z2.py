@@ -4,9 +4,11 @@ from kivymd.uix.label import MDLabel
 from kivy.uix.textinput import TextInput
 from kivy.lang import Builder
 from kivymd.font_definitions import theme_font_styles
+from kivymd.uix.list import OneLineListItem
 
 KV = '''
 MDScreen:
+    
     MDBoxLayout:
         id:box
         orientation: "vertical"
@@ -15,29 +17,49 @@ MDScreen:
         MDTopAppBar:
 
             title: "Express Currency "
-            left_action_items: [["menu", lambda x: app.on_touch_down()]]
+            left_action_items: [["menu", lambda x: app.callback1()]]
             right_action_items: [["dots-vertical", lambda x: app.callback1()]]
-
             
-        MDLabel:
 
-            text: "a"
-            halign: "center"
-            theme_text_color: "Custom"
-            text_color: 1, 1, 1, 1
-            font_style: "H6"
-            pos_hint: {"center_x": .5, "center_y": .5}
-            size_hint: 1, 1
-            font_size: "20sp"
-
+    MDBoxLayout:
+        orientation: "horizontal"
         MDTextField:
-            id: textfield
+
+            pos_hint: {"center_x": .5, "center_y": .5}
+            multiline: False
+            mode: "rectangle"
             hint_text: "Enter amount"
             helper_text: "Enter amount"
             helper_text_mode: "on_focus"
             icon_right: "cash"
             icon_right_color: app.theme_cls.primary_color
+            hint_text: "Euro"
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Wprowadź walutę"
+            height: "10dp"
+
+        MDTextField:
+            text: "Wprowadź walutę"
+            color_mode: "accent"
+
+        MDTextField:
+
             pos_hint: {"center_x": .5, "center_y": .5}
+            multiline: False
+            mode: "rectangle"
+            hint_text: "Enter amount"
+            helper_text: "Enter amount"
+            helper_text_mode: "on_focus"
+            icon_right: "cash"
+            icon_right_color: app.theme_cls.primary_color
+            hint_text: "Złoty"
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Wprowadź walutę"
+            height: "10dp"
+        
+
 
 '''
 
@@ -52,19 +74,24 @@ class ConverterApp(MDApp):
             padding_y=(20,20),
             size_hint=(1,0.5),
             )
-        for name_theme in [
-            "Primary",
-            "Secondary",
-            "Hint",
-            "Error",
-        ]:
-            screen.ids.box.add_widget(
-                MDLabel(
-                    text=name_theme,
-                    halign="center",
-                    theme_text_color=name_theme,
-                    
-                )
+        #for name_theme in [
+        #    "Primary",
+        #    "Secondary",
+        #    "Hint",
+        #    "Error",
+        #]:
+        #    screen.ids.box.add_widget(
+        #        MDLabel(
+        #            text=name_theme,
+         #           halign="center",
+        #            theme_text_color=name_theme,
+         #           
+         #       )
+         #   )
+        def on_start(self):
+            for i in range(20):
+                self.root.ids.container.add_widget(
+                OneLineListItem(text=f"Single-line item {i}")
             )
         return screen
         
