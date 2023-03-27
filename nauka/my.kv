@@ -1,0 +1,37 @@
+Windowmanager:
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>:
+    name:"main"
+    
+    GridLayout:
+        cols:1
+
+        GridLayout:
+            cols:2
+
+            Label:
+                text:"Hasło: "
+
+
+            TextInput:
+                id: passw
+                multiline: False
+
+
+        Button:
+            text: "Zaloguj"
+            on_release: 
+                app.root.current = "SecondWindow" if passw.text == "giga sraka" else 'main'
+                root.manager.transition.direction = "left"
+
+
+<SecondWindow>:
+    name:"SecondWindow"
+
+    Button:
+        text:"cofnij do 1 okna"
+        on_release: 
+            app.root.current = "main"
+            root.manager.transition.direction = "right"

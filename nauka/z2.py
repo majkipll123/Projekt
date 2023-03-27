@@ -104,8 +104,7 @@ class ConverterApp(MDApp):
     def touch(sefl):
         print("działa")
     
-    def callback1(self):
-        print("działa! jeszcze lepiej ")
+    
 
 if __name__ == '__main__':
     ConverterApp().run()

@@ -1,0 +1,157 @@
+Windowmanager:
+    Kalkulator:
+    Ustawienia:
+    Aktywa:
+    Custom:
+<Kalkulator>:
+    name: "Kalkulator"
+    
+    MDScreen:
+    
+        MDBoxLayout:
+            id:box
+            orientation: "vertical"
+            md_bg_color: "#3A3E59"
+
+            MDTopAppBar:
+                md_bg_color: "#C36B84"
+                title: "Express Currency "
+                
+            
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            
+            MDTextField:
+
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Euro"
+                
+                height: "10dp"
+
+            MDFloatingActionButton:
+                md_bg_color:"F9AC66"
+                icon: "account-cash"
+                pos_hint: {"center_x": .1, "center_y": .1}
+                spacing: "56dp"
+                text: 'Back to menu'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'Ustawienia'    
+                
+
+            MDTextField:
+
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Złoty"
+                
+                height: "10dp"
+
+                
+<Custom>:
+    name: "Custom"
+        
+    MDScreen:
+    
+        MDBoxLayout:
+            id:box
+            orientation: "vertical"
+            md_bg_color: "#C36B84"
+
+            MDFloatingActionButton:
+                pos_hint: {"center_x": .5, "center_y": .1}
+                md_bg_color:"#ED6B5B"
+                icon: "account-cash"
+                spacing: "56dp"
+                text: 'Back to menu'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'Ustawienia' 
+
+            MDTopAppBar:
+                md_bg_color: "#F9AC66"
+                title: "Waluta własna "
+            
+                    
+            
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            
+            MDTextField:
+                id: waluta1
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Waluta użytkowanika 1 "
+                
+                height: "10dp"
+             
+            MDTextField:
+                id: kurs
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Twoja waluta"
+                
+                height: "10dp"
+            
+    
+            
+            MDTextField:
+            
+                id: waluta2
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Twoja waluta"
+                
+                height: "10dp"
+    
+
+<Ustawienia>:
+    name: "Ustawienia"
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            text: 'Przelicznik walut'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Kalkulator'
+        Button:
+            text: 'Waluta ustalana przez ciebie'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Custom'
+        Button:
+            text: 'Ustawienia języka'
+        
