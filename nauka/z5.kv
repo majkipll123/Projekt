@@ -14,9 +14,18 @@ Windowmanager:
             md_bg_color: "#3A3E59"
 
             MDTopAppBar:
+                mode: "end"
                 md_bg_color: "#C36B84"
                 title: "Express Currency "
-                
+                MDFloatingActionButton:
+                    md_bg_color:"F9AC66"
+                    icon: "account-cash"
+                    pos_hint: {"center_x": .1, "center_y": .1}
+                    spacing: "56dp"
+                    text: 'Back to menu'
+                    on_press:
+                        root.manager.transition.direction = 'right'
+                        root.manager.current = 'Ustawienia'
             
 
         MDBoxLayout:
@@ -36,15 +45,7 @@ Windowmanager:
                 
                 height: "10dp"
 
-            MDFloatingActionButton:
-                md_bg_color:"F9AC66"
-                icon: "account-cash"
-                pos_hint: {"center_x": .1, "center_y": .1}
-                spacing: "56dp"
-                text: 'Back to menu'
-                on_press:
-                    root.manager.transition.direction = 'right'
-                    root.manager.current = 'Ustawienia'    
+                
                 
 
             MDTextField:
@@ -72,19 +73,20 @@ Windowmanager:
             orientation: "vertical"
             md_bg_color: "#C36B84"
 
-            MDFloatingActionButton:
-                pos_hint: {"center_x": .5, "center_y": .1}
-                md_bg_color:"#ED6B5B"
-                icon: "account-cash"
-                spacing: "56dp"
-                text: 'Back to menu'
-                on_press:
-                    root.manager.transition.direction = 'right'
-                    root.manager.current = 'Ustawienia' 
+            
 
             MDTopAppBar:
                 md_bg_color: "#F9AC66"
                 title: "Waluta własna "
+                MDFloatingActionButton:
+                    pos_hint: {"center_x": .5, "center_y": .1}
+                    md_bg_color:"#ED6B5B"
+                    icon: "account-cash"
+                    spacing: "56dp"
+                    text: 'Back to menu'
+                    on_press:
+                        root.manager.transition.direction = 'right'
+                        root.manager.current = 'Ustawienia' 
             
                     
             
@@ -137,6 +139,29 @@ Windowmanager:
                 
                 height: "10dp"
     
+<Aktywa>:
+    name: "Aktywa"
+    MDScreen:
+    
+        MDBoxLayout:
+            id:box
+            orientation: "vertical"
+            md_bg_color: "#C36B84"
+
+            
+
+            MDTopAppBar:
+                md_bg_color: "#F9AC66"
+                title: "Wszystko czego dusza zapragnie "
+                MDFloatingActionButton:
+                    pos_hint: {"center_x": .5, "center_y": .1}
+                    md_bg_color:"#ED6B5B"
+                    icon: "account-cash"
+                    spacing: "56dp"
+                    text: 'Back to menu'
+                    on_press:
+                        root.manager.transition.direction = 'right'
+                        root.manager.current = 'Ustawienia' 
 
 <Ustawienia>:
     name: "Ustawienia"
@@ -152,6 +177,11 @@ Windowmanager:
             on_press:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'Custom'
+        Button:
+            text: 'Spis wszystkich dostepnych dóbr'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Aktywa'
         Button:
             text: 'Ustawienia języka'
         

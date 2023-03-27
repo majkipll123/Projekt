@@ -36,9 +36,9 @@ class MainApp(MDApp):
         
         return kv
     def callback1(self):
-        #to nie działa ale jest w razie w 
+        #to nie działa ale jest w razie w ale juz dziala w .kv
         #self.root.manager.transition.direction = 'right'
-        self.root.manager.current = 'Ustawienia'
+        #self.root.manager.current = 'Ustawienia'
         print("callback1")
 
 if __name__ == "__main__":
