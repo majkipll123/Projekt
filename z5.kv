@@ -3,6 +3,7 @@ Windowmanager:
     Ustawienia:
     Aktywa:
     Custom:
+    Jezyki:
 <Kalkulator>:
     name: "Kalkulator"
     
@@ -32,7 +33,7 @@ Windowmanager:
             orientation: "horizontal"
             
             MDTextField:
-
+                id: gang
                 pos_hint: {"center_x": .5, "center_y": .5}
                 multiline: False
                 mode: "rectangle"
@@ -147,6 +148,18 @@ Windowmanager:
             id:box
             orientation: "vertical"
             md_bg_color: "#C36B84"
+            TextInput: 
+                text: "Wszystkie dostępne towary"
+                readonly: True
+            TextInput: 
+                text: "Wszystkie dostępne towary"
+                readonly: True
+            TextInput: 
+                text: "Wszystkie dostępne towary"
+                readonly: True
+            TextInput: 
+                text: "Wszystkie dostępne towary"
+                readonly: True
 
             
 
@@ -162,7 +175,28 @@ Windowmanager:
                     on_press:
                         root.manager.transition.direction = 'right'
                         root.manager.current = 'Ustawienia' 
+<Jezyki>:
+    MDScreen:
+    
+        MDBoxLayout:
+            id:box
+            orientation: "vertical"
+            md_bg_color: "#C36B84"
 
+            
+
+            MDTopAppBar:
+                md_bg_color: "#F9AC66"
+                title: "Waluta własna "
+                MDFloatingActionButton:
+                    pos_hint: {"center_x": .5, "center_y": .1}
+                    md_bg_color:"#ED6B5B"
+                    icon: "account-cash"
+                    spacing: "56dp"
+                    text: 'Back to menu'
+                    on_press:
+                        root.manager.transition.direction = 'right'
+                        root.manager.current = 'Ustawienia'
 <Ustawienia>:
     name: "Ustawienia"
     BoxLayout:
@@ -173,15 +207,20 @@ Windowmanager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'Kalkulator'
         Button:
-            text: 'Waluta ustalana przez ciebie'
+            text: 'Custom'
             on_press:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'Custom'
         Button:
-            text: 'Spis wszystkich dostepnych dóbr'
+            text: 'Aktywa'
             on_press:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'Aktywa'
         Button:
             text: 'Ustawienia języka'
+            on_press:
+        Button:
+            text: 'Aktualizuj dane??'
+            on_press:
+
         
