@@ -33,7 +33,12 @@ Windowmanager:
             orientation: "horizontal"
             
             MDTextField:
-                id: gang
+
+                
+                    
+                input_type: 'number'  
+                id: waluta1
+                name: "waluta1"
                 pos_hint: {"center_x": .5, "center_y": .5}
                 multiline: False
                 mode: "rectangle"
@@ -43,14 +48,33 @@ Windowmanager:
                 icon_left: "cash"
                 icon_left_color: app.theme_cls.primary_color
                 hint_text: "Euro"
-                
                 height: "10dp"
+                
+                on_focus:
+                    app.sprawdz(self.text)
+
+                    
+                    self.text = self.text.replace(',', '.')
+                    self.text = self.text.replace(' ', '')
+                    self.text = self.text.replace('€', '')
+
+                    
+                    app.oblicz(waluta1, waluta1, 4.5)
+                    
+                    
+                    
+                    
+                   
+                        
+                    
+                
 
                 
                 
 
             MDTextField:
-
+                id: wynik
+                name: "wynik"
                 pos_hint: {"center_x": .5, "center_y": .5}
                 multiline: False
                 mode: "rectangle"
