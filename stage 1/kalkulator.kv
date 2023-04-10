@@ -32,15 +32,14 @@ Windowmanager:
         MDBoxLayout:
             orientation: "horizontal"
             
-            TextInput:
+            MDTextField:
 
-                text: "0"
+                
                 
                 input_type: 'number'  
-                id: float_input
+                id: waluta1
                 name: "waluta1"
                 pos_hint: {"center_x": .5, "center_y": .5}
-                size_hint: 1, .1
                 multiline: False
                 mode: "rectangle"
                 hint_text: "Enter amount"
@@ -52,7 +51,7 @@ Windowmanager:
                 height: "10dp"
                 
                 on_focus:
-                    
+                    self.text = self.text*3
 
                  
                     

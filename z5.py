@@ -2,14 +2,264 @@ import os
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
+from kivy.uix.textinput import TextInput
 from kivy.properties import ObjectProperty, StringProperty
+import re
 
 
+KV = """
+Windowmanager:
+    Kalkulator:
+    Ustawienia:
+    Aktywa:
+    Custom:
+    Jezyki:
+<Kalkulator>:
+    name: "Kalkulator"
+    
+    MDScreen:
+    
+        MDBoxLayout:
+            id:box
+            orientation: "vertical"
+            md_bg_color: "#3A3E59"
 
+            MDTopAppBar:
+                mode: "end"
+                md_bg_color: "#C36B84"
+                title: "Express Currency "
+                MDFloatingActionButton:
+                    md_bg_color:"F9AC66"
+                    icon: "account-cash"
+                    pos_hint: {"center_x": .1, "center_y": .1}
+                    spacing: "56dp"
+                    text: 'Back to menu'
+                    on_press:
+                        root.manager.transition.direction = 'right'
+                        root.manager.current = 'Ustawienia'
+            
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            
+            FloatInput:
+
+                text: "0"
+                
+                input_type: 'number'  
+                id: float_input
+                name: "waluta1"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                size_hint: 1, .1
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Euro"
+                height: "10dp"
+                on_focus : root.sprawdz(float_input.text)
+            
+                    
+            Button: 
+                text: "Convert"
+                on_release: root.manager.get_screen('Kalkulator').oblicz(float_input.text, waluta2.text, kurs.text)
+                 
+                    
+                    
+                    
+                    
+                    
+                   
+                        
+                    
+                
+
+                
+                
+
+            MDTextField:
+                id: wynik
+                name: "wynik"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Złoty"
+                
+                height: "10dp"
+
+                
+<Custom>:
+    name: "Custom"
+        
+    MDScreen:
+    
+        MDBoxLayout:
+            id:box
+            orientation: "vertical"
+            md_bg_color: "#C36B84"
+
+            
+
+            MDTopAppBar:
+                md_bg_color: "#F9AC66"
+                title: "Waluta własna "
+                MDFloatingActionButton:
+                    pos_hint: {"center_x": .5, "center_y": .1}
+                    md_bg_color:"#ED6B5B"
+                    icon: "account-cash"
+                    spacing: "56dp"
+                    text: 'Back to menu'
+                    on_press:
+                        root.manager.transition.direction = 'right'
+                        root.manager.current = 'Ustawienia' 
+            
+                    
+            
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            
+            MDTextField:
+                id: waluta1
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Waluta użytkowanika 1 "
+                
+                height: "10dp"
+             
+            MDTextField:
+                id: kurs
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Twoja waluta"
+                
+                height: "10dp"
+            
+    
+            
+            MDTextField:
+            
+                id: waluta2
+                pos_hint: {"center_x": .5, "center_y": .5}
+                multiline: False
+                mode: "rectangle"
+                hint_text: "Enter amount"
+                helper_text: "Enter amount"
+                helper_text_mode: "on_focus"
+                icon_left: "cash"
+                icon_left_color: app.theme_cls.primary_color
+                hint_text: "Twoja waluta"
+                
+                height: "10dp"
+    
+<Aktywa>:
+    name: "Aktywa"
+    MDScreen:
+    
+        MDBoxLayout:
+            id:box
+            orientation: "vertical"
+            md_bg_color: "#C36B84"
+            TextInput: 
+                text: "Wszystkie dostępne towary"
+                readonly: True
+            TextInput: 
+                text: "Wszystkie dostępne towary"
+                readonly: True
+            TextInput: 
+                text: "Wszystkie dostępne towary"
+                readonly: True
+            TextInput: 
+                text: "Wszystkie dostępne towary"
+                readonly: True
+
+            
+
+            MDTopAppBar:
+                md_bg_color: "#F9AC66"
+                title: "Wszystko czego dusza zapragnie "
+                MDFloatingActionButton:
+                    pos_hint: {"center_x": .5, "center_y": .1}
+                    md_bg_color:"#ED6B5B"
+                    icon: "account-cash"
+                    spacing: "56dp"
+                    text: 'Back to menu'
+                    on_press:
+                        root.manager.transition.direction = 'right'
+                        root.manager.current = 'Ustawienia' 
+<Jezyki>:
+    MDScreen:
+    
+        MDBoxLayout:
+            id:box
+            orientation: "vertical"
+            md_bg_color: "#C36B84"
+
+            
+
+            MDTopAppBar:
+                md_bg_color: "#F9AC66"
+                title: "Waluta własna "
+                MDFloatingActionButton:
+                    pos_hint: {"center_x": .5, "center_y": .1}
+                    md_bg_color:"#ED6B5B"
+                    icon: "account-cash"
+                    spacing: "56dp"
+                    text: 'Back to menu'
+                    on_press:
+                        root.manager.transition.direction = 'right'
+                        root.manager.current = 'Ustawienia'
+<Ustawienia>:
+    name: "Ustawienia"
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            text: 'Przelicznik walut'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Kalkulator'
+        Button:
+            text: 'Custom'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Custom'
+        Button:
+            text: 'Aktywa'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Aktywa'
+        Button:
+            text: 'Ustawienia języka'
+            on_press:
+        Button:
+            text: 'Aktualizuj dane??'
+            on_press:
+
+        
+
+"""
 
 class Kalkulator(Screen):
-    
-    
     
     pass
 
@@ -35,10 +285,27 @@ class Windowmanager(ScreenManager):
 
 
 
+class FloatInput(TextInput):
+    pat = re.compile('[^0-9.]')
+    def insert_text(self, substring, from_undo=False):
+        pat = self.pat
+        if '.' in self.text:
+            # don't allow more than one decimal point
+            s = re.sub(pat, '', substring)
+        else:
+            s = '.'.join([
+                re.sub(pat, '', ss)
+                for ss in substring.split('.', 1)
+            ])
+        return super(FloatInput, self).insert_text(s, from_undo=from_undo)
+
+
+
+
 # ANDROID PATH   storage/emulated/0/Download
 class MainApp(MDApp):
     def build(self):#budowanie ekranu
-        kv = Builder.load_file("z5.kv")
+        kv = Builder.load_string(KV)
         
         return kv
     kurs=4.5
@@ -86,7 +353,19 @@ class MainApp(MDApp):
                 print(line)
                 #zamiast printowac potrzebuje zeby tworzyly sie linijki w liscie w pliku z5.kv
                 #ale nie wiem jak to zrobic
-            
+    class FloatInput(TextInput):
+
+        pat = re.compile('[^0-9]')
+        def insert_text(self, substring, from_undo=False):
+            pat = self.pat
+            if '.' in self.text:
+                s = re.sub(pat, '', substring)
+            else:
+                s = '.'.join(
+                    re.sub(pat, '', s)
+                    for s in substring.split('.', 1)
+                )
+            return super().insert_text(s, from_undo=from_undo)          
 
 
 if __name__ == "__main__":
