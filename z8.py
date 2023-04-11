@@ -49,7 +49,7 @@ class Kalkulator(Screen):
         self.update_balance()
     # Set label positions
         self.ids.lb1.pos_hint = {'center_x': 0.5, 'center_y': 0.8}
-        
+    
         self.ids.lb2.pos_hint = {'center_x': 0.5, 'center_y': 0.6}
 
         self.ids.lb3.pos_hint = {'center_x': 0.5, 'center_y': 0.5}

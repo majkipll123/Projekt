@@ -18,7 +18,7 @@ Windowmanager:
     name: "Kalkulator"
     
     MDScreen:
-    
+     
         MDBoxLayout:
             id:box
             orientation: "vertical"
