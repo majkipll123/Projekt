@@ -18,7 +18,7 @@ Windowmanager:
     name: "Kalkulator"
     
     MDScreen:
-    
+     
         MDBoxLayout:
             id:box
             orientation: "vertical"
@@ -38,7 +38,6 @@ Windowmanager:
                         root.manager.current = 'Ustawienia'
             
         MDBoxLayout:
-            def 
             orientation: "horizontal"
             
             FloatInput:
@@ -58,10 +57,26 @@ Windowmanager:
                 icon_left_color: app.theme_cls.primary_color
                 hint_text: "Euro"
                 height: "10dp"
-                on_focus: 
-                    self.text
+                on_focus : root.sprawdz(float_input.text)
+            
                     
-          
+            Button: 
+                text: "Convert"
+                on_release: root.manager.get_screen('Kalkulator').oblicz(float_input.text, waluta2.text, kurs.text)
+                 
+                    
+                    
+                    
+                    
+                    
+                   
+                        
+                    
+                
+
+                
+                
+
             MDTextField:
                 id: wynik
                 name: "wynik"
