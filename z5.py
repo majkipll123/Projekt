@@ -23,7 +23,6 @@ Windowmanager:
             id:box
             orientation: "vertical"
             md_bg_color: "#3A3E59"
-
             MDTopAppBar:
                 mode: "end"
                 md_bg_color: "#C36B84"
@@ -38,12 +37,11 @@ Windowmanager:
                         root.manager.transition.direction = 'right'
                         root.manager.current = 'Ustawienia'
             
-
         MDBoxLayout:
+            def 
             orientation: "horizontal"
             
             FloatInput:
-
                 text: "0"
                 
                 input_type: 'number'  
@@ -60,26 +58,10 @@ Windowmanager:
                 icon_left_color: app.theme_cls.primary_color
                 hint_text: "Euro"
                 height: "10dp"
-                on_focus : root.sprawdz(float_input.text)
-            
+                on_focus: 
+                    self.text
                     
-            Button: 
-                text: "Convert"
-                on_release: root.manager.get_screen('Kalkulator').oblicz(float_input.text, waluta2.text, kurs.text)
-                 
-                    
-                    
-                    
-                    
-                    
-                   
-                        
-                    
-                
-
-                
-                
-
+          
             MDTextField:
                 id: wynik
                 name: "wynik"
@@ -92,9 +74,9 @@ Windowmanager:
                 icon_left: "cash"
                 icon_left_color: app.theme_cls.primary_color
                 hint_text: "Złoty"
-                
+                on_focus: 
+                    self.text= self.text*2
                 height: "10dp"
-
                 
 <Custom>:
     name: "Custom"
@@ -105,9 +87,7 @@ Windowmanager:
             id:box
             orientation: "vertical"
             md_bg_color: "#C36B84"
-
             
-
             MDTopAppBar:
                 md_bg_color: "#F9AC66"
                 title: "Waluta własna "
@@ -123,7 +103,6 @@ Windowmanager:
             
                     
             
-
         MDBoxLayout:
             orientation: "horizontal"
             
@@ -192,9 +171,7 @@ Windowmanager:
             TextInput: 
                 text: "Wszystkie dostępne towary"
                 readonly: True
-
             
-
             MDTopAppBar:
                 md_bg_color: "#F9AC66"
                 title: "Wszystko czego dusza zapragnie "
@@ -214,9 +191,7 @@ Windowmanager:
             id:box
             orientation: "vertical"
             md_bg_color: "#C36B84"
-
             
-
             MDTopAppBar:
                 md_bg_color: "#F9AC66"
                 title: "Waluta własna "
@@ -254,10 +229,9 @@ Windowmanager:
         Button:
             text: 'Aktualizuj dane??'
             on_press:
-
         
-
 """
+
 
 class Kalkulator(Screen):
     
