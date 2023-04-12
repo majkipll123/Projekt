@@ -1,0 +1,122 @@
+
+<Kalkulator>:
+    name: "Kalkulator" 
+    MDTopAppBar:
+        mode: "end"
+        md_bg_color: "#C36B84"
+        title: "Express Currency "
+        MDFloatingActionButton:
+            md_bg_color:"F9AC66"
+            icon: "account-cash"
+            pos_hint: {"center_x": .1, "center_y": .1}
+            spacing: "56dp"
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'Ustawienia'
+ 
+    MDLabel:
+        id: lb1
+        text: "Kalkulator walut"
+        pos: root.width /2-self.width/2, root.top/2+150
+    MDLabel:
+        theme_text_color: "Custom"
+        text_color: 0, 0, 1, 1
+        id: lb2
+        text: root.balance
+        pos: root.width /2-self.width/2, root.top/2+100
+    MDLabel:
+        id: lb3
+        text: "Euro"
+        pos: root.width /2-self.width/2, root.top/2+50
+    TextInput:
+        id: tp
+       
+        hint_text: "Wartość"
+        pos: root.width /2-self.width/2, root.top/2-50
+        size_hint: .3, .15
+    Button:
+        id: btn1
+        text: "Przelicz"
+        size_hint: .3, .15
+        pos: root.width /2-self.width/2, root.top/2-150
+        
+        on_release:
+            root.acc.setBalance(int(tp.text))
+            root.update_balance()
+
+
+<Custom>:
+    name: "Custom"
+    MDTopAppBar:
+        md_bg_color: "#F9AC66"
+        title: "Waluta własna "
+        MDFloatingActionButton:
+            pos_hint: {"center_x": .5, "center_y": .1}
+            md_bg_color:"#ED6B5B"
+            icon: "account-cash"
+            spacing: "56dp"
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'Ustawienia' 
+
+<Aktywa>:
+    MDBoxLayout:
+        id:box
+        orientation: "vertical"
+        md_bg_color: "#C36B84"
+        TextInput: 
+            text: "Wszystkie dostępne towary"
+            readonly: True
+        TextInput: 
+            text: "Wszystkie dostępne towary"
+            readonly: True
+        TextInput: 
+            text: "Wszystkie dostępne towary"
+            readonly: True
+        TextInput: 
+            text: "Wszystkie dostępne towary"
+            readonly: True
+    MDTopAppBar:
+        md_bg_color: "#F9AC66"
+        title: "Wszystko czego dusza zapragnie "
+        MDFloatingActionButton:
+            pos_hint: {"center_x": .5, "center_y": .1}
+            md_bg_color:"#ED6B5B"
+            icon: "account-cash"
+            spacing: "56dp"
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'Ustawienia'
+                
+
+<Ustawienia>:
+    name: "Ustawienia"
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            text: 'Przelicznik walut'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Kalkulator'
+        Button:
+            text: 'Custom'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Custom'
+        Button:
+            text: 'Aktywa'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Aktywa'
+        Button:
+            text: 'Ustawienia języka'
+            on_press:
+        Button:
+            text: 'Aktualizuj dane??'
+            on_press:
+
+            
+                
