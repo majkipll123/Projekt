@@ -66,7 +66,7 @@ class Kalkulator(Screen):
 class Custom(Screen):
     pass
 
-class Aktywa(ScrollView):
+class Aktywa(Screen):
     pass
 
 class Ustawienia(Screen):

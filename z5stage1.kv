@@ -14,19 +14,20 @@ Windowmanager:
             orientation: "vertical"
             md_bg_color: "#3A3E59"
 
-            MDTopAppBar:
-                mode: "end"
-                md_bg_color: "#C36B84"
-                title: "Express Currency "
-                MDFloatingActionButton:
-                    md_bg_color:"F9AC66"
-                    icon: "account-cash"
-                    pos_hint: {"center_x": .1, "center_y": .1}
-                    spacing: "56dp"
-                    text: 'Back to menu'
-                    on_press:
-                        root.manager.transition.direction = 'right'
-                        root.manager.current = 'Ustawienia'
+        MDTopAppBar:
+            orientation: "horizontal"
+            type: "top"
+            md_bg_color: "#C36B84"
+            title: "Express Currency "
+            MDFloatingActionButton:
+                md_bg_color:"F9AC66"
+                icon: "account-cash"
+                pos_hint: {"center_x": .9, "center_y": .9}
+                spacing: "100dp"
+                text: 'Back to menu'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'Ustawienia'
             
 
         MDBoxLayout:
