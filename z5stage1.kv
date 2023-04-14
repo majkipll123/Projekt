@@ -77,18 +77,20 @@ Windowmanager:
 
             
 
-            MDTopAppBar:
-                md_bg_color: "#F9AC66"
-                title: "Waluta własna "
-                MDFloatingActionButton:
-                    pos_hint: {"center_x": .5, "center_y": .1}
-                    md_bg_color:"#ED6B5B"
-                    icon: "account-cash"
-                    spacing: "56dp"
-                    text: 'Back to menu'
-                    on_press:
-                        root.manager.transition.direction = 'right'
-                        root.manager.current = 'Ustawienia' 
+        MDTopAppBar:
+            orientation: "horizontal"
+            type: "top"
+            md_bg_color: "#3A3E59"
+            title: "Własna waluta "
+            MDFloatingActionButton:
+                md_bg_color:"F9AC66"
+                icon: "account-cash"
+                pos_hint: {"center_x": .9, "center_y": .9}
+                spacing: "100dp"
+                text: 'Back to menu'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'Ustawienia'
             
                     
             
@@ -163,19 +165,20 @@ Windowmanager:
                 readonly: True
 
             
-
-            MDTopAppBar:
-                md_bg_color: "#F9AC66"
-                title: "Wszystko czego dusza zapragnie "
-                MDFloatingActionButton:
-                    pos_hint: {"center_x": .5, "center_y": .1}
-                    md_bg_color:"#ED6B5B"
-                    icon: "account-cash"
-                    spacing: "56dp"
-                    text: 'Back to menu'
-                    on_press:
-                        root.manager.transition.direction = 'right'
-                        root.manager.current = 'Ustawienia' 
+        MDTopAppBar:
+            orientation: "horizontal"
+            type: "top"
+            md_bg_color: "#3A3E59"
+            title: "Wszystkie dostępne waluty "
+            MDFloatingActionButton:
+                md_bg_color:"F9AC66"
+                icon: "account-cash"
+                pos_hint: {"center_x": .9, "center_y": .9}
+                spacing: "100dp"
+                text: 'Back to menu'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'Ustawienia'
 <Jezyki>:
     MDScreen:
     

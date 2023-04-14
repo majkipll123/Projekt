@@ -16,12 +16,12 @@ class Rates:
                 file_path = os.path.join(os.getcwd(), "a.xml")
                 with open(file_path, "r") as f:
                     soup = BeautifulSoup(f, "xml")
-                    root = soup.find("ExchangeRatesTable")
+                    root = soup.find("result")
         else:
             # Otwórz lokalny plik z kursami
             with open(path, "r") as f:
                 soup = BeautifulSoup(f, "xml")
-                root = soup.find("ExchangeRatesTable")
+                root = soup.find("result")
         for child in root.iter("Rate"):
             currency = child.find("Code").text
             rate = child.find("Mid").text
