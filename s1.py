@@ -29,17 +29,19 @@ class Przelicznik():
         
         self.name = name
         self.__balance__ = balance
+        print(self.__balance__)
         self.from_currency = from_currency
         self.to_currency = to_currency
         self.amount = balance
     def getBalance(self):
+        
         return (self.__balance__)
 
     def setBalance(self, abcd):
         url = "https://api.apilayer.com/exchangerates_data/convert"
 
 
-        querystring = {"to":self.to_currency,"from":self.from_currency,"amount":str(self.amount)}
+        querystring = {"to":self.to_currency,"from":self.from_currency,"amount":str(abcd)}
 
         headers= {
         "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
