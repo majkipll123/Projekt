@@ -12,31 +12,44 @@ from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty, StringProperty
 import requests
 
-url = "https://api.apilayer.com/exchangerates_data/symbols"
+#from_currency = input("Enter the currency you want to convert from: ")
+#to_currency = input("Enter the currency you want to convert to: ")
+#amount = float(input("Enter the amount you want to convert: "))
 
-payload = {}
-headers= {
-  "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
-}
 
-#response = requests.request("GET", url, headers=headers, data = payload)
 
-#status_code = response.status_code
-#result = response.text
+
+
+#print("Conversion result: ", result["result"])
 
 
 
 class Przelicznik():
-    def __init__(self, name, balance,kurs):
-        self.kurs = kurs
+    def __init__(self, name, balance, from_currency, to_currency):
+        
         self.name = name
         self.__balance__ = balance
-
+        self.from_currency = from_currency
+        self.to_currency = to_currency
+        self.amount = balance
     def getBalance(self):
         return (self.__balance__)
 
-    def setBalance(self, zmena):
-        self.__balance__ = str(float(zmena) * self.kurs) + " PLN"
+    def setBalance(self, abcd):
+        url = "https://api.apilayer.com/exchangerates_data/convert"
+
+
+        querystring = {"to":self.to_currency,"from":self.from_currency,"amount":str(self.amount)}
+
+        headers= {
+        "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
+        }
+
+        response = requests.request("GET", url, headers=headers, params=querystring)
+
+        status_code = response.status_code
+        result = response.json()
+        self.__balance__ = str(response.json())+ " PLN"
 
 """
 class FloatInput(acc):
@@ -60,7 +73,7 @@ class Kalkulator(Screen):
     
     def __init__(self, **kwargs):
         super(Kalkulator, self).__init__(**kwargs)
-        self.acc = Przelicznik("Main", 0, 4.3)
+        self.acc = Przelicznik("Main", 0,"PLN","USD")
         self.update_balance()
     # Set label positions
         self.ids.lb1.pos_hint = {'center_x': 1, 'center_y': 0.8}
