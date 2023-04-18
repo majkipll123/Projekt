@@ -51,8 +51,12 @@ class Przelicznik():
 
         status_code = response.status_code
         result = response.json()
-        self.__balance__ = str(response.json())+ " PLN"
+        result2=str(result["result"])
 
+        try:   
+            self.__balance__ = str(response.json)+ " PLN"
+        except:
+            self.__balance__ = "Error: połączenie niestabilne"
 """
 class FloatInput(acc):
     pat = re.compile('[^0-9.]')
