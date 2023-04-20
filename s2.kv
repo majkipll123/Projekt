@@ -139,23 +139,14 @@
                     root.manager.current = 'Ustawienia' 
 
 <Aktywa>:
-    MDBoxLayout:
-        md_bg_color: "#3A3E59"
-        id:box
-        orientation: "vertical"
-        md_bg_color: "#C36B84"
-        TextInput: 
-            text: "Wszystkie dostępne towary"
-            readonly: True
-        TextInput: 
-            text: "Wszystkie dostępne towary"
-            readonly: True
-        TextInput: 
-            text: "Wszystkie dostępne towary"
-            readonly: True
-        TextInput: 
-            text: "Wszystkie dostępne towary"
-            readonly: True
+    Screen:
+            ScrollView:
+                id: aktywa_screen_scroll
+                MDBoxLayout:
+                    id: aktywa_screen_scroll
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
     MDTopAppBar:
         md_bg_color: "#F9AC66"
         title: "Wszystko czego dusza zapragnie "

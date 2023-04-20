@@ -52,9 +52,9 @@ class Przelicznik():
         status_code = response.status_code
         result = response.json()
         result2=str(result["result"])
-
+        
         try:   
-            self.__balance__ = str(response.json)+ " PLN"
+            self.__balance__ = result2+ " PLN"
         except:
             self.__balance__ = "Error: połączenie niestabilne"
 """
