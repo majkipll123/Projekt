@@ -147,18 +147,18 @@
                     orientation: 'vertical'
                     size_hint_y: None
                     height: self.minimum_height
-    MDTopAppBar:
-        md_bg_color: "#F9AC66"
-        title: "Wszystko czego dusza zapragnie "
-        MDFloatingActionButton:
-            pos_hint: {"center_x": .5, "center_y": .1}
-            md_bg_color:"#ED6B5B"
-            icon: "account-cash"
-            spacing: "56dp"
-            text: 'Back to menu'
-            on_press:
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'Ustawienia'
+        MDTopAppBar:
+            md_bg_color: "#F9AC66"
+            title: "Wszystko czego dusza zapragnie "
+            MDFloatingActionButton:
+                pos_hint: {"center_x": .5, "center_y": .1}
+                md_bg_color:"#ED6B5B"
+                icon: "account-cash"
+                spacing: "56dp"
+                text: 'Back to menu'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'Ustawienia'
                 
 
 <Ustawienia>:
