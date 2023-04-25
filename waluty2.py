@@ -16,5 +16,5 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 
 status_code = response.status_code
 result = response.json()
-
+print (result)
 print("Conversion result: ", result["result"])

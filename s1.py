@@ -8,19 +8,18 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.label import MDLabel
 
+
+from kivy.uix.dropdown import DropDown
+from kivy.uix.button import Button
+from kivy.base import runTouchApp
+
+
 from kivy.uix.widget import Widget
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import  ObjectProperty, StringProperty
+from kivy.uix.dropdown import DropDown
 import requests
 
-#from_currency = input("Enter the currency you want to convert from: ")
-#to_currency = input("Enter the currency you want to convert to: ")
-#amount = float(input("Enter the amount you want to convert: "))
 
-
-
-
-
-#print("Conversion result: ", result["result"])
 
 
 
@@ -37,11 +36,14 @@ class Przelicznik():
         
         return (self.__balance__)
 
+    def setText(self, text):
+        self.__balance__ = self.from_currency
+
     def setBalance(self, abcd):
         url = "https://api.apilayer.com/exchangerates_data/convert"
 
 
-        querystring = {"to":self.to_currency,"from":self.from_currency,"amount":str(abcd)}
+        querystring = {"to":"PLN","from":"EUR","amount":str(abcd)}
 
         headers= {
         "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
@@ -53,32 +55,38 @@ class Przelicznik():
         result = response.json()
         result2=str(result["result"])
         
-        try:   
-            self.__balance__ = result2+ " PLN"
+        try:  
+            self.__balance__ = result2+" "+self.to_currency
         except:
             self.__balance__ = "Error: połączenie niestabilne"
 """
-class FloatInput(acc):
-    pat = re.compile('[^0-9.]')
-    def insert_text(self, substring, from_undo=False):
-        pat = self.pat
-        if '.' in self.text:
-            # don't allow more than one decimal point
-            s = re.sub(pat, '', substring)
-        else:
-            s = '.'.join([
-                re.sub(pat, '', ss)
-                for ss in substring.split('.', 1)
-            ])
-        return super(FloatInput, self).insert_text(s, from_undo=from_undo)
+tutaj musi byc wywolanie classy ktora bedzie odpowiedzialna za budowanie listy z aktywami
+
+
+class AktywaList():
+    def __init__(self, **kwargs):
 """
+
+
 
 class Kalkulator(Screen):
     acc = ObjectProperty(None)
     balance = StringProperty('')
-    
+
+
+
     def __init__(self, **kwargs):
         super(Kalkulator, self).__init__(**kwargs)
+
+        self.url= "https://api.apilayer.com/exchangerates_data/symbols"
+        self.payload = {}
+        self.headers= {
+            "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
+        }
+
+        #self.response = requests.request("GET", self.url, headers=self.headers, data = self.payload)
+        #self.symbols = self.response.symbols
+
         self.acc = Przelicznik("Main", 0,"PLN","USD")
         self.update_balance()
     # Set label positions
@@ -87,7 +95,7 @@ class Kalkulator(Screen):
         self.ids.lb2.pos_hint = {'center_x': 1, 'center_y': 0.6}
 
         self.ids.lb3.pos_hint = {'center_x': 1, 'center_y': 0.5}
-
+        self.ids.lb3.text = self.acc.from_currency
         self.ids.tp.pos_hint = {'center_x': 0.5, 'center_y': 0.35}
 
         self.ids.btn1.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
@@ -100,7 +108,21 @@ class Custom(Screen):
     pass
 
 class Aktywa(Screen):
+
+    def __init__(self, **kwargs):
+        super(Aktywa, self).__init__(**kwargs)
+        self.dropdown = DropDown()
+        for index in range(10):
+            btn = Button(text='Value %d' % index, size_hint_y=None, height=44)
+            btn.bind(on_release=lambda btn: self.dropdown.select(btn.text))
+            self.dropdown.add_widget(btn)
+        self.mainbutton = Button(text='Hello', size_hint=(None, None))
+        self.mainbutton.bind(on_release=self.dropdown.open)
+        self.dropdown.bind(on_select=lambda instance, x: setattr(self.mainbutton, 'text', x))
+        self.add_widget(self.mainbutton)
+
     pass
+    
 
 class Ustawienia(Screen):
     pass

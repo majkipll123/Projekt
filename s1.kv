@@ -3,6 +3,7 @@
     name: "Kalkulator" 
     
     MDBoxLayout:
+        cols:3
         id:box
         md_bg_color: "#3A3E59"
         spacing: 15 
@@ -16,25 +17,12 @@
             id: lb1
             text: "Kalkulator walut"
 
-        MDLabel:
-
-            theme_text_color: "Custom"
-            text_color: 0, 0, 1, 1
-            id: lb2
-            text: root.balance
-
-        MDLabel:
-            
-            id: lb3
-            text: "Euro"
-
         TextInput:
 
             id: tp
             multiline: False
             hint_text: "Wartość"
             size_hint: .7, .30
-
         Button:
 
             id: btn1
@@ -45,6 +33,31 @@
             on_release:
                 root.acc.setBalance(int(tp.text))
                 root.update_balance()
+
+        Button:
+
+            id: btn2
+            text: "Waluta1"
+            size_hint: .7, .30
+            pos: root.width /2-self.width/2, root.top/2-150
+        
+            on_release:
+                root.acc.setBalance(int(tp.text))
+                root.update_balance()
+        MDLabel:
+
+            theme_text_color: "Custom"
+            text_color: 0, 0, 1, 1
+            id: lb2
+            text: root.balance
+
+        MDLabel:
+            
+            id: lb3
+            text: " "
+
+
+
         MDTopAppBar:
             orientation: "horizontal"
             type: "top"
@@ -139,23 +152,7 @@
                     root.manager.current = 'Ustawienia' 
 
 <Aktywa>:
-    MDBoxLayout:
-        md_bg_color: "#3A3E59"
-        id:box
-        orientation: "vertical"
-        md_bg_color: "#C36B84"
-        TextInput: 
-            text: "Wszystkie dostępne towary"
-            readonly: True
-        TextInput: 
-            text: "Wszystkie dostępne towary"
-            readonly: True
-        TextInput: 
-            text: "Wszystkie dostępne towary"
-            readonly: True
-        TextInput: 
-            text: "Wszystkie dostępne towary"
-            readonly: True
+    name: "Aktywa"
     MDTopAppBar:
         md_bg_color: "#F9AC66"
         title: "Wszystko czego dusza zapragnie "
@@ -197,5 +194,5 @@
             text: 'Aktualizuj dane??'
             on_press:
 
-            
+
                 
