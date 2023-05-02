@@ -7,9 +7,20 @@
         md_bg_color: "#3A3E59"
         spacing: 15 
         padding: 15
-
         orientation: "vertical"
 
+        MDLabel:
+            id: spinner2_id
+            text: "Kalkulator ala"
+        Spinner:
+            size_hint: None, None
+            size: 100, 44
+            pos_hint: {'center': (.5, .5)}
+            text: 'Home'
+            values: 'Home', 'Work', 'Other', 'Custom'
+            on_text:
+                print("The spinner {} has text {}".format(self, self.text))
+                
         MDLabel:
             theme_text_color: "Custom"
             

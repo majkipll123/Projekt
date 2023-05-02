@@ -1,0 +1,13 @@
+<MyLayot>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            id: click_label
+            text: "wybierz pizze"
+            font_size: 30
+        Spinner:
+            id: spinner_id
+            text: "ulubiona pizza"
+            values: ["margherita", "hawajska", "pepperoni"]
+
+            on_text: root.spinner_clicked(spinner_id.text)
