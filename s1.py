@@ -72,7 +72,7 @@ class Kalkulator(Screen):
     # Set label positions   
 
 
-        self.ids.lb3.text = self.acc.from_currency
+        self.ids.lb3.text = "zamiana "+self.acc.from_currency+" na " + self.acc.to_currency
         
         self.ids.spinner_id.text
         
