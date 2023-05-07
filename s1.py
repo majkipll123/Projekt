@@ -3,22 +3,13 @@ import kivy
 kivy.require("1.10.1")
 from kivy.uix.scrollview import ScrollView
 import os
+from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.label import MDLabel
 
 
-from kivy.base import runTouchApp
-from kivy.uix.spinner import Spinner
-
-
-from kivy.uix.dropdown import DropDown
-from kivy.uix.button import Button
-from kivy.base import runTouchApp
-
-
-from kivy.uix.widget import Widget
 from kivy.properties import  ObjectProperty, StringProperty
 
 import requests
@@ -46,6 +37,14 @@ class Kalkulator(Screen):
             "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
         }    
         
+        self.ids.lb1.pos_hint = {'center_x': 1, 'center_y': 0.8}
+    
+        self.ids.lb2.pos_hint = {'center_x': 1, 'center_y': 0.6}
+
+        self.ids.lb3.pos_hint = {'center_x': 1, 'center_y': 0.5}
+
+        self.ids.btn1.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
+        self.ids.tp.pos_hint = {'center_x': 0.5, 'center_y': 0.35}   
         
     def update_from_currency(self,value,value2):
     
@@ -60,18 +59,13 @@ class Kalkulator(Screen):
     
         
 
-    # Set label positions
-        self.ids.lb1.pos_hint = {'center_x': 1, 'center_y': 0.8}
-    
-        self.ids.lb2.pos_hint = {'center_x': 1, 'center_y': 0.6}
+    # Set label positions   
 
+
+        self.ids.lb3.text = "zamiana "+self.acc.from_currency+" na " + self.acc.to_currency
         
-
-        self.ids.lb3.pos_hint = {'center_x': 1, 'center_y': 0.5}
-        self.ids.lb3.text = self.acc.from_currency
-        self.ids.tp.pos_hint = {'center_x': 0.5, 'center_y': 0.35}
         self.ids.spinner_id.text
-        self.ids.btn1.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
+        
 
     
 
@@ -104,7 +98,7 @@ class Przelicznik():
         url = "https://api.apilayer.com/exchangerates_data/convert"
 
 
-        querystring = {"to":str(self.to_currency),"from":str(self.from_currency),"amount":str(abcd)}
+        querystring = {"to":str(self.to_currency),"from":str(self.from_currency),"amount":str(float(abcd))}
 
         headers= {
         "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
@@ -144,7 +138,15 @@ class Custom(Screen):
         self.headers= {
             "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
         }    
+        self.ids.lc1.pos_hint = {'center_x': 0.5, 'center_y': 0.8}
+        self.ids.lc2.pos_hint = {'center_x': 0.5, 'center_y': 0.9}
+
         
+
+        self.ids.tc.pos_hint = {'center_x': 0.5, 'center_y': 0.5}
+        self.ids.custom_id.pos_hint = {'center_x': 0.5, 'center_y': 0.35}
+        
+        self.ids.btnc.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
         
     def update_balance2(self,value):
     
@@ -162,15 +164,7 @@ class Custom(Screen):
     # Set label positions
         
 # Set label positions
-        self.ids.lc1.pos_hint = {'center_x': 0.5, 'center_y': 0.8}
-        self.ids.lc2.pos_hint = {'center_x': 0.5, 'center_y': 0.9}
 
-        
-
-        self.ids.tc.pos_hint = {'center_x': 0.5, 'center_y': 0.5}
-        self.ids.custom_id.pos_hint = {'center_x': 0.5, 'center_y': 0.35}
-        
-        self.ids.btnc.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
     
 
 
@@ -223,6 +217,7 @@ Builder.load_file("s1.kv")
 
 class MainApp(MDApp):
     def build(self):
+        Window.size = (600, 1000)
         sm = ScreenManager()
         sm.add_widget(Kalkulator(name='Kalkulator'))
         sm.add_widget(Custom(name='Custom')) # use Custom here
