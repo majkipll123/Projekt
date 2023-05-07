@@ -3,49 +3,59 @@ import kivy
 kivy.require("1.10.1")
 from kivy.uix.scrollview import ScrollView
 import os
-from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.label import MDLabel
 
 
+from kivy.base import runTouchApp
+from kivy.uix.spinner import Spinner
+
+
+from kivy.uix.dropdown import DropDown
+from kivy.uix.button import Button
+from kivy.base import runTouchApp
+
+
+from kivy.uix.widget import Widget
 from kivy.properties import  ObjectProperty, StringProperty
+
+
 
 import requests
 
 
 
-
-
-
-
+Lang = False
 
 class Kalkulator(Screen):
     acc = ObjectProperty(None)
     balance = StringProperty('')
 
     
- 
+
     def __init__(self, **kwargs):
         
         super(Kalkulator, self).__init__(**kwargs)
-
+        
         self.url= "https://api.apilayer.com/exchangerates_data/symbols"
         self.payload = {}
         self.headers= {
             "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
         }    
+        print(Lang)
         
-        self.ids.lb1.pos_hint = {'center_x': 1, 'center_y': 0.8}
     
-        self.ids.lb2.pos_hint = {'center_x': 1, 'center_y': 0.6}
-
-        self.ids.lb3.pos_hint = {'center_x': 1, 'center_y': 0.5}
-
-        self.ids.btn1.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
-        self.ids.tp.pos_hint = {'center_x': 0.5, 'center_y': 0.35}   
+    def change_lang(self, value):
         
+        
+        """
+            
+        """
+
+
+
     def update_from_currency(self,value,value2):
     
 
@@ -59,13 +69,42 @@ class Kalkulator(Screen):
     
         
 
-    # Set label positions   
+    # Set label positions
+        self.ids.lb1.pos_hint = {'center_x': 1, 'center_y': 0.8}
 
+        self.ids.lb1.text = "Your currency converter"
+    
+        self.ids.lb2.pos_hint = {'center_x': 1, 'center_y': 0.6}
 
-        self.ids.lb3.text = "zamiana "+self.acc.from_currency+" na " + self.acc.to_currency
         
+
+        self.ids.lb3.pos_hint = {'center_x': 1, 'center_y': 0.5}
+        
+        self.ids.tp.pos_hint = {'center_x': 0.5, 'center_y': 0.35}
         self.ids.spinner_id.text
-        
+        self.ids.btn1.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
+
+        if Lang:
+            self.ids.lb3.text = "Tranzakcja z:"+" "+self.acc.from_currency+" "+"na"+" "+self.acc.to_currency
+            self.ids.lb1.text = "Twój kalkulator walutowy"
+            self.ids.tp.hint_text = "Wpisz kwotę"
+            self.ids.btn1.text = "Przelicz"
+            """
+            self.ids.spinner_id.text = "Wybierz walute z której chcesz przeliczyć"
+            self.ids.spinner_id2.text = "Wybierz walute na jaką chcesz przeliczyć"
+            """
+           
+        else:
+            self.ids.lb1.text = "Your currency converter"
+            self.ids.tp.hint_text = "Enter amount"
+            self.ids.btn1.text = "Convert"
+            """
+            self.ids.spinner_id.text = "Choose currency you want to convert from"
+            self.ids.spinner_id2.text = "Choose currency you want to convert to"
+            """
+            self.ids.lb3.text = "Transaction from:"+" "+self.acc.from_currency+" "+"to"+" "+self.acc.to_currency
+            
+
 
     
 
@@ -98,7 +137,7 @@ class Przelicznik():
         url = "https://api.apilayer.com/exchangerates_data/convert"
 
 
-        querystring = {"to":str(self.to_currency),"from":str(self.from_currency),"amount":str(float(abcd))}
+        querystring = {"to":str(self.to_currency[:3]),"from":str(self.from_currency[:3]),"amount":str(abcd)}
 
         headers= {
         "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
@@ -114,7 +153,10 @@ class Przelicznik():
             self.__balance__ = result2+" "+self.to_currency
             
         except:
-            self.__balance__ = "Error: połączenie niestabilne"
+            if Lang:
+                self.__balance__ = "Error: połączenie niestabilne"
+            else:  
+                self.__balance__ = "Error: connection unstable"
 """
 tutaj musi byc wywolanie classy ktora bedzie odpowiedzialna za budowanie listy z aktywami
 
@@ -138,15 +180,7 @@ class Custom(Screen):
         self.headers= {
             "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
         }    
-        self.ids.lc1.pos_hint = {'center_x': 0.5, 'center_y': 0.8}
-        self.ids.lc2.pos_hint = {'center_x': 0.5, 'center_y': 0.9}
-
         
-
-        self.ids.tc.pos_hint = {'center_x': 0.5, 'center_y': 0.5}
-        self.ids.custom_id.pos_hint = {'center_x': 0.5, 'center_y': 0.35}
-        
-        self.ids.btnc.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
         
     def update_balance2(self,value):
     
@@ -164,7 +198,15 @@ class Custom(Screen):
     # Set label positions
         
 # Set label positions
+        self.ids.lc1.pos_hint = {'center_x': 0.5, 'center_y': 0.8}
+        self.ids.lc2.pos_hint = {'center_x': 0.5, 'center_y': 0.9}
 
+        
+
+        self.ids.tc.pos_hint = {'center_x': 0.5, 'center_y': 0.5}
+        self.ids.custom_id.pos_hint = {'center_x': 0.5, 'center_y': 0.35}
+        
+        self.ids.btnc.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
     
 
 
@@ -196,10 +238,16 @@ class Przelicznik_custom():
         result2=str(float(self.kurs)*float(abcd))
         
         try:  
-            self.__balance__ = result2+ " oto ilość następującej waluty."
+            if Lang:
+                self.__balance__ = result2+ " oto ilość następującej waluty."
+            else:
+                self.__balance__ = result2+ " here is the amount of the following currency."
             
         except:
-            self.__balance__ = "Error: połączenie niestabilne"
+            if Lang:
+                self.__balance__ = "Error: połączenie niestabilne"
+            else:
+                self.__balance__ = "Error: connection unstable"
 
 
 class Aktywa(Screen):
@@ -211,19 +259,59 @@ class Aktywa(Screen):
     
 
 class Ustawienia(Screen):
-    pass
+
+    acc = ObjectProperty(None)
+    balance = StringProperty('')
+    
+    def __init__(self, **kwargs):
+        
+        super(Ustawienia, self).__init__(**kwargs)
+
+        if Lang:
+            self.ids.btn11.text = 'Przelicznik walut'
+            self.ids.btn12.text = 'Waluta własna'
+            self.ids.btn13.text = 'Wszytkie dostępne aktywa'
+            self.ids.btn14.text = 'Zmień język na angielski'
+            self.ids.btn15.text = 'Historia i występowanie waluty'
+        else:
+            self.ids.btn11.text = 'Currency converter'
+            self.ids.btn12.text = 'Custom currency'
+            self.ids.btn13.text = 'All available assets'
+            self.ids.btn14.text = 'Change language to polish'
+            self.ids.btn15.text = 'History and occurrence of currency'
+    
+       
+        
+
+    def refresh_kalkulator(self):
+        Kalkulator.change_lang(self,Lang)
+        
+    def zmien_jezyk(self):
+        global Lang
+        Lang = not Lang
+        print(Lang)
+
+
+    
+
 
 Builder.load_file("s1.kv")
 
 class MainApp(MDApp):
+    
+
     def build(self):
-        Window.size = (600, 1000)
         sm = ScreenManager()
         sm.add_widget(Kalkulator(name='Kalkulator'))
         sm.add_widget(Custom(name='Custom')) # use Custom here
         sm.add_widget(Aktywa(name='Aktywa'))
         sm.add_widget(Ustawienia(name='Ustawienia'))
         return sm
+
+
+        
+    
+  
 
 
 
