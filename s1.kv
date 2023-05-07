@@ -23,24 +23,23 @@
             multiline: False
             hint_text: "Wartość"
             size: .12, .1
-        GridLayout:
-            cols:3
-            MDLabel:
-                text: " "                
-                hint_size: 0.1 , 0.1
-            Button:
+    
+        MDLabel:
+            text: " "                
+            hint_size: 0.1 , 0.1
+        Button:
 
-                id: btn1
-                text: "Przelicz"
-                size_hint: .7, .30
-                pos: root.width /2-self.width/2, root.top/2-150
-            
-                on_release:
-                    root.acc.setBalance(int(tp.text))
-                    root.update_balance()
-            MDLabel:
-                text: " " 
-                hint_size: 0.1 , 0.1
+            id: btn1
+            text: "Przelicz"
+            size_hint: .7, .30
+            pos: root.width /2-self.width/2, root.top/2-150
+        
+            on_release:
+                root.acc.setBalance(int(tp.text))
+                root.update_balance()
+        MDLabel:
+            text: " " 
+            hint_size: 0.1 , 0.1
                 
         Spinner:
             id: spinner_id
