@@ -10,16 +10,6 @@ from kivy.lang import Builder
 from kivymd.uix.label import MDLabel
 
 
-from kivy.base import runTouchApp
-from kivy.uix.spinner import Spinner
-
-
-from kivy.uix.dropdown import DropDown
-from kivy.uix.button import Button
-from kivy.base import runTouchApp
-
-
-from kivy.uix.widget import Widget
 from kivy.properties import  ObjectProperty, StringProperty
 
 import requests
@@ -108,7 +98,7 @@ class Przelicznik():
         url = "https://api.apilayer.com/exchangerates_data/convert"
 
 
-        querystring = {"to":str(self.to_currency),"from":str(self.from_currency),"amount":str(abcd)}
+        querystring = {"to":str(self.to_currency),"from":str(self.from_currency),"amount":str(float(abcd))}
 
         headers= {
         "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
