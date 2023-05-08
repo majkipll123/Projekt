@@ -8,6 +8,7 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.label import MDLabel
 
+import sys
 
 from kivy.base import runTouchApp
 from kivy.uix.spinner import Spinner
@@ -47,12 +48,35 @@ class Kalkulator(Screen):
         print(Lang)
         
     
-    def change_lang(self, value):
-        
-        
-        """
-            
-        """
+    
+    def change_lang(self):
+        #"<Screen name='Kalkulator'>"
+        if Lang:     
+            try:
+                self.ids.lb3.text = "Tranzakcja z:"+" "+self.acc.from_currency+" "+"na"+" "+self.acc.to_currency
+            except:
+                pass
+            self.ids.lb1.text = "Twój kalkulator walutowy"
+            self.ids.tp.hint_text = "Wpisz kwotę"
+            self.ids.btn1.text = "Przelicz"
+            """
+            self.ids.spinner_id.text = "Wybierz walute z której chcesz przeliczyć"
+            self.ids.spinner_id2.text = "Wybierz walute na jaką chcesz przeliczyć"
+            """
+           
+        else:
+            self.ids.lb1.text = "Your currency converter"
+            self.ids.tp.hint_text = "Enter amount"
+            self.ids.btn1.text = "Convert"
+            """
+            self.ids.spinner_id.text = "Choose currency you want to convert from"
+            self.ids.spinner_id2.text = "Choose currency you want to convert to"
+            """
+            try:
+                self.ids.lb3.text = "Transaction from:"+" "+self.acc.from_currency+" "+"to"+" "+self.acc.to_currency
+            except:
+                pass
+
 
 
 
@@ -84,26 +108,7 @@ class Kalkulator(Screen):
         self.ids.spinner_id.text
         self.ids.btn1.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
 
-        if Lang:
-            self.ids.lb3.text = "Tranzakcja z:"+" "+self.acc.from_currency+" "+"na"+" "+self.acc.to_currency
-            self.ids.lb1.text = "Twój kalkulator walutowy"
-            self.ids.tp.hint_text = "Wpisz kwotę"
-            self.ids.btn1.text = "Przelicz"
-            """
-            self.ids.spinner_id.text = "Wybierz walute z której chcesz przeliczyć"
-            self.ids.spinner_id2.text = "Wybierz walute na jaką chcesz przeliczyć"
-            """
-           
-        else:
-            self.ids.lb1.text = "Your currency converter"
-            self.ids.tp.hint_text = "Enter amount"
-            self.ids.btn1.text = "Convert"
-            """
-            self.ids.spinner_id.text = "Choose currency you want to convert from"
-            self.ids.spinner_id2.text = "Choose currency you want to convert to"
-            """
-            self.ids.lb3.text = "Transaction from:"+" "+self.acc.from_currency+" "+"to"+" "+self.acc.to_currency
-            
+
 
 
     
@@ -266,7 +271,9 @@ class Ustawienia(Screen):
     def __init__(self, **kwargs):
         
         super(Ustawienia, self).__init__(**kwargs)
+        self.on_change()
 
+    def on_change(self):
         if Lang:
             self.ids.btn11.text = 'Przelicznik walut'
             self.ids.btn12.text = 'Waluta własna'
@@ -279,16 +286,26 @@ class Ustawienia(Screen):
             self.ids.btn13.text = 'All available assets'
             self.ids.btn14.text = 'Change language to polish'
             self.ids.btn15.text = 'History and occurrence of currency'
+        
+            
+
+
+    """  self.refresh_kalkulator()
     
-       
+    
         
 
     def refresh_kalkulator(self):
-        Kalkulator.change_lang(self,Lang)
+        print(type(self))
+        print(self)
+        string = "<Screen name='Kalkulator'>"
+        class_name = string.split("'")[1]
+        klass = eval(class_name)
+        Kalkulator.change_lang(self.klass)"""
         
     def zmien_jezyk(self):
         global Lang
-        Lang = not Lang
+        Lang = not Lang 
         print(Lang)
 
 
