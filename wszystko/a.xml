@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExchangeRatesTable effectiveDate="2023-04-12">
+    <Rate>
+        <Currency>euro</Currency>
+        <Code>EUR</Code>
+        <Mid>4.50</Mid>
+    </Rate>
+    <Rate>
+        <Currency>złoty polski</Currency>
+        <Code>PLN</Code>
+        <Mid>1.00</Mid>
+    </Rate>
+</ExchangeRatesTable>
