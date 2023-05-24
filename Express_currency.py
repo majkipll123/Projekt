@@ -27,7 +27,8 @@ from kivy.properties import  ObjectProperty, StringProperty
 import requests
 
 
-
+#lagn false = en
+#lang true = pl
 Lang = False
 
 class Kalkulator(Screen):
@@ -45,7 +46,12 @@ class Kalkulator(Screen):
         self.headers= {
             "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
         }    
-        print(Lang)
+        if Lang:
+            self.ids.spinner_id.text = "Wybierz walute z której chcesz przeliczyć"
+            self.ids.spinner_id2.text = "Wybierz walute na jaką chcesz przeliczyć"
+        else:
+            self.ids.spinner_id.text = "Choose currency you want to convert from"
+            self.ids.spinner_id2.text = "Choose currency you want to convert to"
         
     
     def zamien_miejscami(self, a, b):
@@ -58,18 +64,22 @@ class Kalkulator(Screen):
                 self.ids.lb3.text = "Tranzakcja z:"+" "+self.acc.from_currency+" "+"na"+" "+self.acc.to_currency
             except:
                 pass
-            self.ids.lb1.text = "Twój kalkulator walutowy"
+            self.ids.lb1.text = "Kalkulator walut"
             self.ids.tp.hint_text = "Wpisz kwotę"
             self.ids.btn1.text = "Przelicz"
+            self.ids.btn2.text = "Zmień waluty miejscami"
             """
+            tu trzeba bedzie pokombinowac z globana wartoscia i jakins boolem i dobra funckja ale 
+            bedzie sie to dało zrobic na luzie lub nie na luzie
             self.ids.spinner_id.text = "Wybierz walute z której chcesz przeliczyć"
             self.ids.spinner_id2.text = "Wybierz walute na jaką chcesz przeliczyć"
             """
            
         else:
-            self.ids.lb1.text = "Your currency converter"
+            self.ids.lb1.text = "Currency converter"
             self.ids.tp.hint_text = "Enter amount"
             self.ids.btn1.text = "Convert"
+            self.ids.btn2.text = "Swap currencies"
             """
             self.ids.spinner_id.text = "Choose currency you want to convert from"
             self.ids.spinner_id2.text = "Choose currency you want to convert to"
@@ -98,7 +108,6 @@ class Kalkulator(Screen):
     # Set label positions
         self.ids.lb1.pos_hint = {'center_x': 1, 'center_y': 0.8}
 
-        self.ids.lb1.text = "Your currency converter"
     
         self.ids.lb2.pos_hint = {'center_x': 1, 'center_y': 0.6}
 
@@ -187,24 +196,6 @@ class Custom(Screen):
         self.headers= {
             "apikey": "xoVqRitppuJgc9tx8Q45wayzXqWuAehN"
         }    
-        
-        
-    def update_balance2(self,value):
-    
-
-        self.kurs = value 
-        
-        
-        self.acc = Przelicznik_custom("Main", 0,value)
-        
-        #self.response = requests.request("GET", self.url, headers=self.headers, data = self.payload)
-        #self.symbols = self.response.symbols
-    
-        
-
-    # Set label positions
-        
-# Set label positions
         self.ids.lc1.pos_hint = {'center_x': 0.5, 'center_y': 0.8}
         self.ids.lc2.pos_hint = {'center_x': 0.5, 'center_y': 0.9}
 
@@ -214,9 +205,39 @@ class Custom(Screen):
         self.ids.custom_id.pos_hint = {'center_x': 0.5, 'center_y': 0.35}
         
         self.ids.btnc.pos_hint = {'center_x': 0.5, 'center_y': 0.2}
+        if Lang:     
+            self.ids.lc1.text = "Kalkulator walut własnych"
+            self.ids.tc.hint_text = "Wartość"
+            self.ids.custom_id.hint_text = "Ustaw swój kurs"
+            self.ids.btnc.text = "Przelicz"
+        else:
+            self.ids.lc1.text = "Custom currency converter"
+            self.ids.tc.hint_text = "Amount"
+            self.ids.custom_id.hint_text = "Set your own rate"
+            self.ids.btnc.text = "Convert"
+    
+        
+    def update_balance2(self,value):
     
 
-
+        self.kurs = value 
+        
+        
+        self.acc = Przelicznik_custom("Main", 0,value)
+        
+    def change_lang(self):
+        
+        if Lang:     
+            self.ids.lc1.text = "Kalkulator walut własnych"
+            self.ids.tc.hint_text = "Wartość"
+            self.ids.custom_id.hint_text = "Ustaw swój kurs"
+            self.ids.btnc.text = "Przelicz"
+        else:
+            self.ids.lc1.text = "Custom currency converter"
+            self.ids.tc.hint_text = "Amount"
+            self.ids.custom_id.hint_text = "Set your own rate"
+            self.ids.btnc.text = "Convert"
+    
     def update_balance(self):
         self.balance = str(self.acc.getBalance())
 
@@ -314,7 +335,7 @@ class Ustawienia(Screen):
     
 
 
-Builder.load_file("currency_express.kv")
+Builder.load_file("Express_currency.kv")
 
 class MainApp(MDApp):
     
