@@ -60,10 +60,9 @@ class Kalkulator(Screen):
     def change_lang(self):
         #"<Screen name='Kalkulator'>"
         if Lang:     
-            try:
-                self.ids.lb3.text = "Tranzakcja z:"+" "+self.acc.from_currency+" "+"na"+" "+self.acc.to_currency
-            except:
-                pass
+            
+            self.ids.lb3.text = "Tranzakcja z:"+" "+self.acc.from_currency+" "+"na"+" "+self.acc.to_currency
+            
             self.ids.lb1.text = "Kalkulator walut"
             self.ids.tp.hint_text = "Wpisz kwotę"
             self.ids.btn1.text = "Przelicz"
@@ -173,13 +172,7 @@ class Przelicznik():
                 self.__balance__ = "Error: połączenie niestabilne"
             else:  
                 self.__balance__ = "Error: connection unstable"
-"""
-tutaj musi byc wywolanie classy ktora bedzie odpowiedzialna za budowanie listy z aktywami
 
-
-class AktywaList():
-    def __init__(self, **kwargs):
-"""
 
 class Custom(Screen):
     acc = ObjectProperty(None)
@@ -218,11 +211,8 @@ class Custom(Screen):
     
         
     def update_balance2(self,value):
-    
 
         self.kurs = value 
-        
-        
         self.acc = Przelicznik_custom("Main", 0,value)
         
     def change_lang(self):
@@ -250,10 +240,10 @@ class Przelicznik_custom():
         print(self.__balance__)
         self.kurs = kurs
         self.amount = balance
-
+    """
     def update_from_currency(self, value): 
             print(value)
-
+    """
     def getBalance(self):
         
         return (self.__balance__)
@@ -283,7 +273,7 @@ class Aktywa(Screen):
     def __init__(self, **kwargs):
         super(Aktywa, self).__init__(**kwargs)
         
-    pass
+
     
 
 class Ustawienia(Screen):
@@ -347,14 +337,6 @@ class MainApp(MDApp):
         sm.add_widget(Aktywa(name='Aktywa'))
         sm.add_widget(Ustawienia(name='Ustawienia'))
         return sm
-
-
-        
-    
-  
-
-
-
 
 
 if __name__ == "__main__":
