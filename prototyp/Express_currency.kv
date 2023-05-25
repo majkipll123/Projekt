@@ -1,0 +1,246 @@
+#from kivy.utils import get_color_from_hex
+<Kalkulator>:
+    name: "Kalkulator" 
+    
+    MDGridLayout:
+        
+        cols:1
+        id:box
+        md_bg_color: "#3A3E59"
+        spacing: 15 
+        padding: 15
+        
+        MDLabel:
+            theme_text_color: "Custom"
+            valign: "center"
+            halign: "center"
+            id: lb1
+            text: "Kalkulator walut"
+
+        MDTextField:
+
+            id: tp
+            multiline: False
+            hint_text: "Wartość"
+            size: .12, .1
+            input_filter: "float"
+            on_focus:  
+                root.change_lang()
+        
+        Button:
+
+            id: btn1
+            text: "Przelicz"
+            size_hint: .7, .30
+            pos: root.width /2-self.width/2, root.top/2-150
+        
+            on_release:
+                root.acc.setBalance(float(tp.text))
+                root.update_balance()
+                root.change_lang()
+                
+        
+                
+        Spinner:
+            id: spinner_id
+            text: "Wybierz walute z której chcesz przeliczyć"
+            values: ["AED United Arab Emirates Dirham", "AFN Afghan Afghani", "ALL Albanian Lek", "AMD Armenian Dram", "ANG Netherlands Antillean Guilder", "AOA Angolan Kwanza", "ARS Argentine Peso", "AUD Australian Dollar", "AWG Aruban Florin", "AZN Azerbaijani Manat", "BAM Bosnia-Herzegovina Convertible Mark", "BBD Barbadian Dollar", "BDT Bangladeshi Taka", "BGN Bulgarian Lev", "BHD Bahraini Dinar", "BIF Burundian Franc", "BMD Bermudan Dollar", "BND Brunei Dollar", "BOB Bolivian Boliviano", "BRL Brazilian Real", "BSD Bahamian Dollar", "BTC Bitcoin", "BTN Bhutanese Ngultrum", "BWP Botswanan Pula", "BYN New Belarusian Ruble", "BYR Belarusian Ruble", "BZD Belize Dollar", "CAD Canadian Dollar", "CDF Congolese Franc", "CHF Swiss Franc", "CLF Chilean Unit of Account (UF)", "CLP Chilean Peso", "CNY Chinese Yuan", "COP Colombian Peso", "CRC Costa Rican Col\u00f3n", "CUC Cuban Convertible Peso", "CUP Cuban Peso", "CVE Cape Verdean Escudo", "CZK Czech Republic Koruna", "DJF Djiboutian Franc", "DKK Danish Krone", "DOP Dominican Peso", "DZD Algerian Dinar", "EGP Egyptian Pound", "ERN Eritrean Nakfa", "ETB Ethiopian Birr", "EUR Euro", "FJD Fijian Dollar", "FKP Falkland Islands Pound", "GBP British Pound Sterling", "GEL Georgian Lari", "GGP Guernsey Pound", "GHS Ghanaian Cedi", "GIP Gibraltar Pound", "GMD Gambian Dalasi", "GNF Guinean Franc", "GTQ Guatemalan Quetzal", "GYD Guyanaese Dollar", "HKD Hong Kong Dollar", "HNL Honduran Lempira", "HRK Croatian Kuna", "HTG Haitian Gourde", "HUF Hungarian Forint", "IDR Indonesian Rupiah", "ILS Israeli New Sheqel", "IMP Manx pound", "INR Indian Rupee", "IQD Iraqi Dinar", "IRR Iranian Rial", "ISK Icelandic Kr\u00f3na", "JEP Jersey Pound", "JMD Jamaican Dollar", "JOD Jordanian Dinar", "JPY Japanese Yen", "KES Kenyan Shilling", "KGS Kyrgystani Som", "KHR Cambodian Riel", "KMF Comorian Franc", "KPW North Korean Won", "KRW South Korean Won", "KWD Kuwaiti Dinar", "KYD Cayman Islands Dollar", "KZT Kazakhstani Tenge", "LAK Laotian Kip", "LBP Lebanese Pound", "LKR Sri Lankan Rupee", "LRD Liberian Dollar", "LSL Lesotho Loti", "LTL Lithuanian Litas", "LVL Latvian Lats", "LYD Libyan Dinar", "MAD Moroccan Dirham", "MDL Moldovan Leu", "MGA Malagasy Ariary", "MKD Macedonian Denar", "MMK Myanma Kyat", "MNT Mongolian Tugrik", "MOP Macanese Pataca", "MRO Mauritanian Ouguiya", "MUR Mauritian Rupee", "MVR Maldivian Rufiyaa", "MWK Malawian Kwacha", "MXN Mexican Peso", "MYR Malaysian Ringgit", "MZN Mozambican Metical", "NAD Namibian Dollar", "NGN Nigerian Naira", "NIO Nicaraguan C\u00f3rdoba", "NOK Norwegian Krone", "NPR Nepalese Rupee", "NZD New Zealand Dollar", "OMR Omani Rial", "PAB Panamanian Balboa", "PEN Peruvian Nuevo Sol", "PGK Papua New Guinean Kina", "PHP Philippine Peso", "PKR Pakistani Rupee", "PLN Polish Zloty", "PYG Paraguayan Guarani", "QAR Qatari Rial", "RON Romanian Leu", "RSD Serbian Dinar", "RUB Russian Ruble", "RWF Rwandan Franc", "SAR Saudi Riyal", "SBD Solomon Islands Dollar", "SCR Seychellois Rupee", "SDG Sudanese Pound", "SEK Swedish Krona", "SGD Singapore Dollar", "SHP Saint Helena Pound", "SLE Sierra Leonean Leone", "SLL Sierra Leonean Leone", "SOS Somali Shilling", "SRD Surinamese Dollar", "STD S\u00e3o Tom\u00e9 and Pr\u00edncipe Dobra", "SVC Salvadoran Col\u00f3n", "SYP Syrian Pound", "SZL Swazi Lilangeni", "THB Thai Baht", "TJS Tajikistani Somoni", "TMT Turkmenistani Manat", "TND Tunisian Dinar", "TOP Tongan Pa\u02bbanga", "TRY Turkish Lira", "TTD Trinidad and Tobago Dollar", "TWD New Taiwan Dollar", "TZS Tanzanian Shilling", "UAH Ukrainian Hryvnia", "UGX Ugandan Shilling", "USD United States Dollar", "UYU Uruguayan Peso", "UZS Uzbekistan Som", "VEF Venezuelan Bol\u00edvar Fuerte", "VES Sovereign Bolivar", "VND Vietnamese Dong", "VUV Vanuatu Vatu", "WST Samoan Tala", "XAF CFA Franc BEAC", "XAG Silver (troy ounce)", "XAU Gold (troy ounce)", "XCD East Caribbean Dollar", "XDR Special Drawing Rights", "XOF CFA Franc BCEAO", "XPF CFP Franc", "YER Yemeni Rial", "ZAR South African Rand", "ZMK Zambian Kwacha (pre-2013)", "ZMW Zambian Kwacha", "ZWL Zimbabwean Dollar"]
+ 
+            on_text: root.update_from_currency(spinner_id.text, spinner_id2.text), root.change_lang()
+        Button:
+
+            id: btn2
+            text: "Zmień waluty miejscami"
+            size_hint: .7, .30
+            pos: root.width /2-self.width/2, root.top/2-150
+        
+            on_release:
+                root.zamien_miejscami(root.ids.spinner_id.text, root.ids.spinner_id2.text)
+                root.update_balance()
+        Spinner:
+            id: spinner_id2
+            text: "Wybierz walute na jaką chcesz przeliczyć"
+            values: ["AED United Arab Emirates Dirham", "AFN Afghan Afghani", "ALL Albanian Lek", "AMD Armenian Dram", "ANG Netherlands Antillean Guilder", "AOA Angolan Kwanza", "ARS Argentine Peso", "AUD Australian Dollar", "AWG Aruban Florin", "AZN Azerbaijani Manat", "BAM Bosnia-Herzegovina Convertible Mark", "BBD Barbadian Dollar", "BDT Bangladeshi Taka", "BGN Bulgarian Lev", "BHD Bahraini Dinar", "BIF Burundian Franc", "BMD Bermudan Dollar", "BND Brunei Dollar", "BOB Bolivian Boliviano", "BRL Brazilian Real", "BSD Bahamian Dollar", "BTC Bitcoin", "BTN Bhutanese Ngultrum", "BWP Botswanan Pula", "BYN New Belarusian Ruble", "BYR Belarusian Ruble", "BZD Belize Dollar", "CAD Canadian Dollar", "CDF Congolese Franc", "CHF Swiss Franc", "CLF Chilean Unit of Account (UF)", "CLP Chilean Peso", "CNY Chinese Yuan", "COP Colombian Peso", "CRC Costa Rican Col\u00f3n", "CUC Cuban Convertible Peso", "CUP Cuban Peso", "CVE Cape Verdean Escudo", "CZK Czech Republic Koruna", "DJF Djiboutian Franc", "DKK Danish Krone", "DOP Dominican Peso", "DZD Algerian Dinar", "EGP Egyptian Pound", "ERN Eritrean Nakfa", "ETB Ethiopian Birr", "EUR Euro", "FJD Fijian Dollar", "FKP Falkland Islands Pound", "GBP British Pound Sterling", "GEL Georgian Lari", "GGP Guernsey Pound", "GHS Ghanaian Cedi", "GIP Gibraltar Pound", "GMD Gambian Dalasi", "GNF Guinean Franc", "GTQ Guatemalan Quetzal", "GYD Guyanaese Dollar", "HKD Hong Kong Dollar", "HNL Honduran Lempira", "HRK Croatian Kuna", "HTG Haitian Gourde", "HUF Hungarian Forint", "IDR Indonesian Rupiah", "ILS Israeli New Sheqel", "IMP Manx pound", "INR Indian Rupee", "IQD Iraqi Dinar", "IRR Iranian Rial", "ISK Icelandic Kr\u00f3na", "JEP Jersey Pound", "JMD Jamaican Dollar", "JOD Jordanian Dinar", "JPY Japanese Yen", "KES Kenyan Shilling", "KGS Kyrgystani Som", "KHR Cambodian Riel", "KMF Comorian Franc", "KPW North Korean Won", "KRW South Korean Won", "KWD Kuwaiti Dinar", "KYD Cayman Islands Dollar", "KZT Kazakhstani Tenge", "LAK Laotian Kip", "LBP Lebanese Pound", "LKR Sri Lankan Rupee", "LRD Liberian Dollar", "LSL Lesotho Loti", "LTL Lithuanian Litas", "LVL Latvian Lats", "LYD Libyan Dinar", "MAD Moroccan Dirham", "MDL Moldovan Leu", "MGA Malagasy Ariary", "MKD Macedonian Denar", "MMK Myanma Kyat", "MNT Mongolian Tugrik", "MOP Macanese Pataca", "MRO Mauritanian Ouguiya", "MUR Mauritian Rupee", "MVR Maldivian Rufiyaa", "MWK Malawian Kwacha", "MXN Mexican Peso", "MYR Malaysian Ringgit", "MZN Mozambican Metical", "NAD Namibian Dollar", "NGN Nigerian Naira", "NIO Nicaraguan C\u00f3rdoba", "NOK Norwegian Krone", "NPR Nepalese Rupee", "NZD New Zealand Dollar", "OMR Omani Rial", "PAB Panamanian Balboa", "PEN Peruvian Nuevo Sol", "PGK Papua New Guinean Kina", "PHP Philippine Peso", "PKR Pakistani Rupee", "PLN Polish Zloty", "PYG Paraguayan Guarani", "QAR Qatari Rial", "RON Romanian Leu", "RSD Serbian Dinar", "RUB Russian Ruble", "RWF Rwandan Franc", "SAR Saudi Riyal", "SBD Solomon Islands Dollar", "SCR Seychellois Rupee", "SDG Sudanese Pound", "SEK Swedish Krona", "SGD Singapore Dollar", "SHP Saint Helena Pound", "SLE Sierra Leonean Leone", "SLL Sierra Leonean Leone", "SOS Somali Shilling", "SRD Surinamese Dollar", "STD S\u00e3o Tom\u00e9 and Pr\u00edncipe Dobra", "SVC Salvadoran Col\u00f3n", "SYP Syrian Pound", "SZL Swazi Lilangeni", "THB Thai Baht", "TJS Tajikistani Somoni", "TMT Turkmenistani Manat", "TND Tunisian Dinar", "TOP Tongan Pa\u02bbanga", "TRY Turkish Lira", "TTD Trinidad and Tobago Dollar", "TWD New Taiwan Dollar", "TZS Tanzanian Shilling", "UAH Ukrainian Hryvnia", "UGX Ugandan Shilling", "USD United States Dollar", "UYU Uruguayan Peso", "UZS Uzbekistan Som", "VEF Venezuelan Bol\u00edvar Fuerte", "VES Sovereign Bolivar", "VND Vietnamese Dong", "VUV Vanuatu Vatu", "WST Samoan Tala", "XAF CFA Franc BEAC", "XAG Silver (troy ounce)", "XAU Gold (troy ounce)", "XCD East Caribbean Dollar", "XDR Special Drawing Rights", "XOF CFA Franc BCEAO", "XPF CFP Franc", "YER Yemeni Rial", "ZAR South African Rand", "ZMK Zambian Kwacha (pre-2013)", "ZMW Zambian Kwacha", "ZWL Zimbabwean Dollar"]
+            on_text: root.update_from_currency(spinner_id.text, spinner_id2.text), root.change_lang()
+        MDLabel:
+
+            theme_text_color: "Custom"
+            text_color: 0, 0, 1, 1
+            id: lb2
+            text: root.balance
+
+        MDLabel:
+            
+            id: lb3
+            text: " "
+
+
+
+        MDTopAppBar:
+            orientation: "horizontal"
+            type: "top"
+            md_bg_color: "#C36B84"
+            title: "Express Currency "
+            MDFloatingActionButton:
+                md_bg_color:"F9AC66"
+                icon: "account-cash"
+                pos_hint: {"center_x": .9, "center_y": .9}
+                spacing: "100dp"
+                text: 'Back to menu'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'Ustawienia'
+                    root.change_lang()
+
+
+
+<Custom>:
+    name: "Custom"
+    MDBoxLayout:
+        cols:3
+        id:box
+        md_bg_color: "#3A3E59"
+        spacing: 15 
+        padding: 15
+
+        orientation: "vertical"
+
+        MDLabel:
+            theme_text_color: "Custom"
+            id: lc1
+            text: "Kalkulator walut własnych"
+
+        TextInput:
+            id: tc
+            multiline: False
+            hint_text: "Wartość"
+            size_hint: .7, .30
+            on_focus: root.change_lang()
+
+        
+        TextInput:
+            id: custom_id
+            multiline: False
+            hint_text: "Ustaw swój kurs"
+            size_hint: .7, 0.3
+            on_text: root.update_balance2(custom_id.text) 
+            on_focus: root.change_lang()
+        
+        Button:
+
+            id: btnc
+            text: "Przelicz"
+            size_hint: .7, .30
+            pos: root.width /2-self.width/2, root.top/2-150
+        
+            on_release:
+                root.acc.setBalance(int(tc.text))
+                root.update_balance()
+                root.change_lang()
+
+        MDLabel:
+
+            theme_text_color: "Custom"
+            text_color: 0, 0, 1, 1
+            id: lc2
+            text: root.balance
+
+        
+
+
+
+        MDTopAppBar:
+            orientation: "horizontal"
+            type: "top"
+            md_bg_color: "#C36B84"
+            title: "Express Currency "
+            MDFloatingActionButton:
+                md_bg_color:"F9AC66"
+                icon: "account-cash"
+                pos_hint: {"center_x": .9, "center_y": .9}
+                spacing: "100dp"
+                text: 'Back to menu'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'Ustawienia'
+
+
+<Aktywa>:
+    name: "Aktywa"
+    
+    MDLabel:
+        theme_text_color: "Custom"
+        pos_hint: {"center_x": .5, "center_y": 0.9}
+        id: lc1
+        text: "Wszystkie dostępne waluty"
+    Spinner:
+        text: "Pokaż listę"
+        values: ["AED United Arab Emirates Dirham", "AFN Afghan Afghani", "ALL Albanian Lek", "AMD Armenian Dram", "ANG Netherlands Antillean Guilder", "AOA Angolan Kwanza", "ARS Argentine Peso", "AUD Australian Dollar", "AWG Aruban Florin", "AZN Azerbaijani Manat", "BAM Bosnia-Herzegovina Convertible Mark", "BBD Barbadian Dollar", "BDT Bangladeshi Taka", "BGN Bulgarian Lev", "BHD Bahraini Dinar", "BIF Burundian Franc", "BMD Bermudan Dollar", "BND Brunei Dollar", "BOB Bolivian Boliviano", "BRL Brazilian Real", "BSD Bahamian Dollar", "BTC Bitcoin", "BTN Bhutanese Ngultrum", "BWP Botswanan Pula", "BYN New Belarusian Ruble", "BYR Belarusian Ruble", "BZD Belize Dollar", "CAD Canadian Dollar", "CDF Congolese Franc", "CHF Swiss Franc", "CLF Chilean Unit of Account (UF)", "CLP Chilean Peso", "CNY Chinese Yuan", "COP Colombian Peso", "CRC Costa Rican Col\u00f3n", "CUC Cuban Convertible Peso", "CUP Cuban Peso", "CVE Cape Verdean Escudo", "CZK Czech Republic Koruna", "DJF Djiboutian Franc", "DKK Danish Krone", "DOP Dominican Peso", "DZD Algerian Dinar", "EGP Egyptian Pound", "ERN Eritrean Nakfa", "ETB Ethiopian Birr", "EUR Euro", "FJD Fijian Dollar", "FKP Falkland Islands Pound", "GBP British Pound Sterling", "GEL Georgian Lari", "GGP Guernsey Pound", "GHS Ghanaian Cedi", "GIP Gibraltar Pound", "GMD Gambian Dalasi", "GNF Guinean Franc", "GTQ Guatemalan Quetzal", "GYD Guyanaese Dollar", "HKD Hong Kong Dollar", "HNL Honduran Lempira", "HRK Croatian Kuna", "HTG Haitian Gourde", "HUF Hungarian Forint", "IDR Indonesian Rupiah", "ILS Israeli New Sheqel", "IMP Manx pound", "INR Indian Rupee", "IQD Iraqi Dinar", "IRR Iranian Rial", "ISK Icelandic Kr\u00f3na", "JEP Jersey Pound", "JMD Jamaican Dollar", "JOD Jordanian Dinar", "JPY Japanese Yen", "KES Kenyan Shilling", "KGS Kyrgystani Som", "KHR Cambodian Riel", "KMF Comorian Franc", "KPW North Korean Won", "KRW South Korean Won", "KWD Kuwaiti Dinar", "KYD Cayman Islands Dollar", "KZT Kazakhstani Tenge", "LAK Laotian Kip", "LBP Lebanese Pound", "LKR Sri Lankan Rupee", "LRD Liberian Dollar", "LSL Lesotho Loti", "LTL Lithuanian Litas", "LVL Latvian Lats", "LYD Libyan Dinar", "MAD Moroccan Dirham", "MDL Moldovan Leu", "MGA Malagasy Ariary", "MKD Macedonian Denar", "MMK Myanma Kyat", "MNT Mongolian Tugrik", "MOP Macanese Pataca", "MRO Mauritanian Ouguiya", "MUR Mauritian Rupee", "MVR Maldivian Rufiyaa", "MWK Malawian Kwacha", "MXN Mexican Peso", "MYR Malaysian Ringgit", "MZN Mozambican Metical", "NAD Namibian Dollar", "NGN Nigerian Naira", "NIO Nicaraguan C\u00f3rdoba", "NOK Norwegian Krone", "NPR Nepalese Rupee", "NZD New Zealand Dollar", "OMR Omani Rial", "PAB Panamanian Balboa", "PEN Peruvian Nuevo Sol", "PGK Papua New Guinean Kina", "PHP Philippine Peso", "PKR Pakistani Rupee", "PLN Polish Zloty", "PYG Paraguayan Guarani", "QAR Qatari Rial", "RON Romanian Leu", "RSD Serbian Dinar", "RUB Russian Ruble", "RWF Rwandan Franc", "SAR Saudi Riyal", "SBD Solomon Islands Dollar", "SCR Seychellois Rupee", "SDG Sudanese Pound", "SEK Swedish Krona", "SGD Singapore Dollar", "SHP Saint Helena Pound", "SLE Sierra Leonean Leone", "SLL Sierra Leonean Leone", "SOS Somali Shilling", "SRD Surinamese Dollar", "STD S\u00e3o Tom\u00e9 and Pr\u00edncipe Dobra", "SVC Salvadoran Col\u00f3n", "SYP Syrian Pound", "SZL Swazi Lilangeni", "THB Thai Baht", "TJS Tajikistani Somoni", "TMT Turkmenistani Manat", "TND Tunisian Dinar", "TOP Tongan Pa\u02bbanga", "TRY Turkish Lira", "TTD Trinidad and Tobago Dollar", "TWD New Taiwan Dollar", "TZS Tanzanian Shilling", "UAH Ukrainian Hryvnia", "UGX Ugandan Shilling", "USD United States Dollar", "UYU Uruguayan Peso", "UZS Uzbekistan Som", "VEF Venezuelan Bol\u00edvar Fuerte", "VES Sovereign Bolivar", "VND Vietnamese Dong", "VUV Vanuatu Vatu", "WST Samoan Tala", "XAF CFA Franc BEAC", "XAG Silver (troy ounce)", "XAU Gold (troy ounce)", "XCD East Caribbean Dollar", "XDR Special Drawing Rights", "XOF CFA Franc BCEAO", "XPF CFP Franc", "YER Yemeni Rial", "ZAR South African Rand", "ZMK Zambian Kwacha (pre-2013)", "ZMW Zambian Kwacha", "ZWL Zimbabwean Dollar"]
+        size_hint: .6, .15
+        pos_hint: {"center_x": .5, "center_y": 0.7}
+    
+    MDLabel:
+        theme_text_color: "Custom"
+        pos_hint: {"center_x": .5, "center_y": 0.45}
+        id: lc2
+        text: "Wszystkie dostępne aktywa"
+    Spinner:
+        text: "Pokaż liste"
+        values: ["na razie tylko btc","BTC Bitcoin","XAG Silver (troy ounce)", "XAU Gold (troy ounce)"]
+        size_hint: .6, .15
+        pos_hint: {"center_x": .5, "center_y": 0.35}
+
+    MDTopAppBar:
+        md_bg_color: "#F9AC66"
+        title: "Wszystko czego dusza zapragnie "
+    MDFloatingActionButton:
+        pos_hint: {"center_x": .5, "center_y": .1}
+        md_bg_color:"#ED6B5B"
+        icon: "account-cash"
+        spacing: "56dp"
+        text: 'Back to menu'
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'Ustawienia'
+                
+
+<Ustawienia>:
+    name: "Ustawienia"
+    MDGridLayout:
+        cols:1
+        id:box2
+        md_bg_color: "#3A3E59"
+        spacing: 15 
+        padding: 15
+        md_bg_color: "#3A3E59"
+        
+        Button:
+            id: btn11
+            text: 'Przelicznik walut'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Kalkulator'
+                print(root.manager)
+               
+                
+                
+        Button:
+            id: btn12
+            text: 'Waluta użytkowkina'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Custom'
+        Button:
+            id: btn13
+            text: 'Aktywa'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'Aktywa'
+        Button:
+            id: btn14
+            text: 'Ustawienia języka'
+            on_press: root.zmien_jezyk(), root.on_change(),
+        Button:
+            id: btn15
+            text: 'Historia i występowanie waluty'
+            on_press:
