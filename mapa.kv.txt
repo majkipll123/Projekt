@@ -1,0 +1,7 @@
+#:import MapView kivy_garden.mapview.MapView
+
+MapView
+    lat:36
+    lonm:-78
+    zoom:10
+    
