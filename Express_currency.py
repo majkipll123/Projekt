@@ -147,7 +147,8 @@ class Przelicznik():
 
         status_code = response.status_code
         result = response.json()
-        result2=str(result["result"])
+        result2 = "{:.2f}".format(result["result"])
+
         
         try:  
             self.__balance__ = result2+" "+self.to_currency
@@ -358,7 +359,7 @@ class MainApp(MDApp):
         if(platform == 'android' or platform == 'ios'):
             Window.maximize()
         else:
-            Window.size = (620, 1024)
+            Window.size = (800,1200)
         
         sm = ScreenManager()
         sm.add_widget(Kalkulator(name='Kalkulator'))

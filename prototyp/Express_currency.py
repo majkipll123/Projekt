@@ -1,29 +1,14 @@
 import kivy
 
 kivy.require("1.10.1")
-from kivy.uix.scrollview import ScrollView
-import os
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivymd.uix.label import MDLabel
 
-import sys
-
-from kivy.base import runTouchApp
-from kivy.uix.spinner import Spinner
-
-
-from kivy.uix.dropdown import DropDown
-from kivy.uix.button import Button
-from kivy.base import runTouchApp
-
-
-from kivy.uix.widget import Widget
 from kivy.properties import  ObjectProperty, StringProperty
-
-
-
+from kivy.core.window import Window
+from kivy_garden.mapview import  MapMarker
+from kivy.utils import platform
 import requests
 
 
@@ -162,7 +147,8 @@ class Przelicznik():
 
         status_code = response.status_code
         result = response.json()
-        result2=str(result["result"])
+        result2 = "{:.2f}".format(result["result"])
+
         
         try:  
             self.__balance__ = result2+" "+self.to_currency
@@ -272,9 +258,45 @@ class Aktywa(Screen):
 
     def __init__(self, **kwargs):
         super(Aktywa, self).__init__(**kwargs)
-        
 
     
+        
+        
+
+class Historia(Screen):
+
+    def __init__(self, **kwargs):
+        super(Historia, self).__init__(**kwargs)
+        self.markers = []  
+
+    def mapa(self, miejsce):
+        plik = 'kraje_swiata.txt'  
+        pasujace_znaki = self.ids.spinner_id3.text[:2]
+
+        wyniki = znajdz_linie_pasujace(plik, pasujace_znaki)
+        for linia in wyniki:
+            dane = linia.split(',')
+            latitude = float(dane[1])
+            longitude = float(dane[2])
+            marker = MapMarker(lat=latitude, lon=longitude)
+            self.markers.append(marker)  # Dodaj marker do listy
+            self.ids.mapview.add_marker(marker)
+            
+
+    def usun_wszystkie_markery(self):
+        for marker in self.markers:
+            self.ids.mapview.remove_marker(marker)
+        self.markers = []  # Wyczyść listę markerów
+def znajdz_linie_pasujace(plik, pasujace_znaki):
+    wyniki = []
+    with open(plik, 'r') as f:
+        for linia in f:
+            if pasujace_znaki in linia:
+                wyniki.append(linia)
+    return wyniki
+
+   
+
 
 class Ustawienia(Screen):
 
@@ -331,13 +353,24 @@ class MainApp(MDApp):
     
 
     def build(self):
+       
+    
+        
+        if(platform == 'android' or platform == 'ios'):
+            Window.maximize()
+        else:
+            Window.size = (800,1200)
+        
         sm = ScreenManager()
         sm.add_widget(Kalkulator(name='Kalkulator'))
         sm.add_widget(Custom(name='Custom')) # use Custom here
         sm.add_widget(Aktywa(name='Aktywa'))
         sm.add_widget(Ustawienia(name='Ustawienia'))
+        sm.add_widget(Historia(name='Historia'))
         return sm
+        
 
 
 if __name__ == "__main__":
     MainApp().run()
+    
