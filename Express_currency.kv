@@ -128,6 +128,7 @@
             id: tc
             multiline: False
             hint_text: "Wartość"
+            input_filter: "float"
             size_hint: .7, .30
             on_focus: root.change_lang()
 
@@ -136,6 +137,7 @@
             id: custom_id
             multiline: False
             hint_text: "Ustaw swój kurs"
+            input_filter: "float"
             size_hint: .7, 0.3
             on_text: root.update_balance2(custom_id.text) 
             on_focus: root.change_lang()
