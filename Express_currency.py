@@ -272,26 +272,44 @@ class Historia(Screen):
     def mapa(self, miejsce):
         plik = 'kraje_swiata.txt'  
         pasujace_znaki = self.ids.spinner_id3.text[:2]
-
-        wyniki = znajdz_linie_pasujace(plik, pasujace_znaki)
-        for linia in wyniki:
-            dane = linia.split(',')
-            latitude = float(dane[1])
-            longitude = float(dane[2])
-            marker = MapMarker(lat=latitude, lon=longitude)
-            self.markers.append(marker)  # Dodaj marker do listy
-            self.ids.mapview.add_marker(marker)
+        if pasujace_znaki == 'EU':
+            wyjatki=["DE", "FR", "IT", "BE", "HR", "CY", "EE", "GR", "IE", "LV", "LT", "LU", "MT", "NL", "AT", "PT", "SK", "SI", "ES"]
+            wyniki = znajdz_linie_pasujace(plik, wyjatki)
             
+            for linia in wyniki:
+                dane = linia.split(',')
+                for linia in dane: 
+                    latitude = float(dane[1])
+                    longitude = float(dane[2])
+                    marker = MapMarker(lat=latitude, lon=longitude)
+                    self.markers.append(marker)  # Dodaj marker do listy
+                    self.ids.mapview.add_marker(marker)
+                    
+        else:
+            wyniki = znajdz_linie_pasujace(plik, pasujace_znaki)
+            for linia in wyniki:
+                
+                
+                dane = linia.split(',')
+                print(dane)
+                print(linia)
+                latitude = float(dane[1])
+                longitude = float(dane[2])
+                marker = MapMarker(lat=latitude, lon=longitude)
+                self.markers.append(marker)  # Dodaj marker do listy
+                self.ids.mapview.add_marker(marker)
+                
 
     def usun_wszystkie_markery(self):
         for marker in self.markers:
             self.ids.mapview.remove_marker(marker)
         self.markers = []  # Wyczyść listę markerów
+
 def znajdz_linie_pasujace(plik, pasujace_znaki):
     wyniki = []
     with open(plik, 'r') as f:
         for linia in f:
-            if pasujace_znaki in linia:
+            if any(znak in linia for znak in pasujace_znaki):
                 wyniki.append(linia)
     return wyniki
 
@@ -363,7 +381,7 @@ class MainApp(MDApp):
         
         sm = ScreenManager()
         sm.add_widget(Kalkulator(name='Kalkulator'))
-        sm.add_widget(Custom(name='Custom')) # use Custom here
+        sm.add_widget(Custom(name='Custom')) 
         sm.add_widget(Aktywa(name='Aktywa'))
         sm.add_widget(Ustawienia(name='Ustawienia'))
         sm.add_widget(Historia(name='Historia'))
