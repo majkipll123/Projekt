@@ -281,11 +281,11 @@ class Historia(Screen):
         if Lang:
             self.ids.spinner_id3.text="Wybierz walutę której wykorzystanie chcesz zobaczyć na świecie"
             self.ids.top_app_bar.title="Mapa wszystkich dostępnych walut "
-            self.ids.usun.text="Usuń wszystkie markery"
+
         else:  
             self.ids.spinner_id3.text="Choose currency to see its usage around the world"
             self.ids.top_app_bar.title="Map of all available currencies"
-            self.ids.usun.text="Remove all markers"
+
     def mapa(self, miejsce):
         plik = 'kraje_swiata.txt'  
         pasujace_znaki = self.ids.spinner_id3.text[:2]
