@@ -292,10 +292,11 @@ class Historia(Screen):
         if pasujace_znaki == 'EU':
             wyjatki=["DE", "FR", "IT", "BE", "HR", "CY", "EE", "GR", "IE", "LV", "LT", "LU", "MT", "NL", "AT", "PT", "SK", "SI", "ES"]
             wyniki = znajdz_linie_pasujace(plik, wyjatki)
-            
+            self.usun_wszystkie_markery()
             for linia in wyniki:
                 dane = linia.split(',')
                 for linia in dane: 
+                    
                     latitude = float(dane[1])
                     longitude = float(dane[2])
                     marker = MapMarker(lat=latitude, lon=longitude)
@@ -309,7 +310,7 @@ class Historia(Screen):
                 
                 
                 dane = linia.split(',')
-                
+                self.usun_wszystkie_markery()
                 latitude = float(dane[1])
                 longitude = float(dane[2])
                 marker = MapMarker(lat=latitude, lon=longitude)
