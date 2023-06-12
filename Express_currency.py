@@ -11,16 +11,13 @@ from kivy_garden.mapview import  MapMarker
 from kivy.utils import platform
 import requests
 
-
 #lagn false = en
 #lang true = pl
-Lang = False
+Lang = True
 
 class Kalkulator(Screen):
     acc = ObjectProperty(None)
     balance = StringProperty('')
-
-    
 
     def __init__(self, **kwargs):
         
@@ -45,9 +42,10 @@ class Kalkulator(Screen):
     def change_lang(self):
         #"<Screen name='Kalkulator'>"
         if Lang:     
-            
-            self.ids.lb3.text = "Tranzakcja z:"+" "+self.acc.from_currency+" "+"na"+" "+self.acc.to_currency
-            
+            try:
+                self.ids.lb3.text = "Tranzakcja z:"+" "+self.acc.from_currency+" "+"na"+" "+self.acc.to_currency
+            except:
+                pass
             self.ids.lb1.text = "Kalkulator walut"
             self.ids.tp.hint_text = "Wpisz kwotę"
             self.ids.btn1.text = "Przelicz"

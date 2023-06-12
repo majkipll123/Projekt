@@ -128,6 +128,7 @@
             id: tc
             multiline: False
             hint_text: "Wartość"
+            input_filter: "float"
             size_hint: .7, .30
             on_focus: root.change_lang()
 
@@ -135,6 +136,7 @@
         TextInput:
             id: custom_id
             multiline: False
+            input_filter: "float"
             hint_text: "Ustaw swój kurs"
             size_hint: .7, 0.3
             on_text: root.update_balance2(custom_id.text) 
@@ -148,7 +150,7 @@
             pos: root.width /2-self.width/2, root.top/2-150
         
             on_release:
-                root.acc.setBalance(int(tc.text))
+                root.acc.setBalance(float(tc.text))
                 root.update_balance()
                 root.change_lang()
 
